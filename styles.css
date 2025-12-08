@@ -4,22 +4,22 @@ body {
 
 .navbar {
   width: 100%;
-  background-color: #000000;
+  background-color: #c8b7b7;
   overflow: auto;
 }
 
 .navbar a {
   float: left;
-  padding: 12px;
+  padding: 10px;
   color: rgb(255, 255, 255);
   text-decoration: none;
   font-size: 17px;
-  width: 33.33%; /* 3 equal width links */
+  width: 25%;
   text-align: center; 
 }
 
 .navbar a:hover {
-  background-color: #000;
+  background-color: #976989;
 }
 
 .navbar a.active {
