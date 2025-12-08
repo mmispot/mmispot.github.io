@@ -8,6 +8,7 @@ h2
     font-size: 100px;
     color: #000000;
     text-align: center;
+    margin: auto;
 }
 
 h5
@@ -28,7 +29,7 @@ iframe
 {
     padding-top: 50px;
     display: block;
-    margin: 0 auto;
+    margin: auto;
 }
 
 p {
@@ -40,9 +41,13 @@ p {
 
 div
 {
+    border-style: solid;
+    border-width:10px;
+    border-color: rgb(253, 184, 200);
     text-align: center;
     background-color: rgb(226, 226, 226);
-    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     width: 75%;
     margin: auto;
 }
