@@ -4,14 +4,14 @@ body {
 
 .navbar {
   width: 100%;
-  background-color: #555;
+  background-color: #000000;
   overflow: auto;
 }
 
 .navbar a {
   float: left;
   padding: 12px;
-  color: white;
+  color: rgb(255, 255, 255);
   text-decoration: none;
   font-size: 17px;
   width: 33.33%; /* 3 equal width links */
@@ -23,7 +23,7 @@ body {
 }
 
 .navbar a.active {
-  background-color: #04AA6D;
+  background-color: #ff8dd5;
 }
 
 @media screen and (max-width: 500px) {
