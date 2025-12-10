@@ -3,10 +3,10 @@ body {
     font-family:'Times New Roman', Times, serif;
 }
 
-.animate__bounce {
-    animation: bounce;
-    animation-duration: 2s;
-    font-family:Arial, Helvetica, sans-serif
+.animate__bounceIn {
+    animation: bounceIn;
+    animation-duration: 5s;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 .gallery {
