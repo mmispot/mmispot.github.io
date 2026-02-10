@@ -3,6 +3,84 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+header {
+    background: #222;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post {
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.post-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    text-decoration: solid;
+    font-size: 24px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.hero {
+    background: #ffffff;
+    padding: 40px;
+    text-align: center;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+.devblog-preview {
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background: #444;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #222;
+    color: white;
+    margin-top: 40px;
+}
+
 .gallery {
   display: flex;
   align-items: center;
@@ -29,12 +107,14 @@ body {
 }
 
 .slidedesc {
-  width: 75%;
+  
+  width: 70%;
   font-family: Arial, Helvetica, sans-serif
   font-size: 20px;
   color: #000000;
   text-align: left;
-  display: flex;
+  display: inline-block;
+  padding-top: 100px;
   flex-direction: column;
 }
 
