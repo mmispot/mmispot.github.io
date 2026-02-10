@@ -3,7 +3,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
 .gallery {
   display: flex;
   align-items: center;
@@ -26,14 +25,17 @@ body {
   align-items: center;
   gap: 20px;
   justify-content: center;
+  flex-direction: row;
 }
 
 .slidedesc {
-  width: 400px;
+  width: 75%;
   font-family: Arial, Helvetica, sans-serif
   font-size: 20px;
   color: #000000;
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .slide img {
@@ -86,9 +88,12 @@ body {
 
 .textbox
 {
+    text-align: center;
+    text-wrap-mode: wrap;
+    vertical-align: middle;
     width: 100%;
     margin: auto;
-    padding: 10px;
+    padding: 20px;
     font-size: 20px;
     border-style: solid;
     border-width:10px;
