@@ -45,9 +45,9 @@ const games = [
     desc: 'A tower defense game combined with a resource management sim. Integrated into a call center system where you manage customer queues and complete tasks during your workday to power up your defenses & recruit heroes.',
     colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
     screenshots: [
-        { label: "Main Menu",  src: "images" },
-        { label: "Gameplay",   src: "images" },
-        { label: "Gameplay", src: "images" },
+        { label: "GamePlay",  src: "images/KINGDOMCORP1.png" },
+        { label: "Gameplay",   src: "images/KINGDOMCORP2.png" },
+        { label: "Gameplay", src: "images/KINGDOMCORP3.png" },
     ],
     devlogs: [
       { date: '19/03/2026', title: 'My role in the project',
@@ -245,7 +245,8 @@ function injectGames() {
     <div class="game-card" data-index="${i}" style="--hover-bg:${g.hoverBg}; --accent:${g.accent};">
       ${g.featured ? '<div class="featured-badge">★ Featured</div>' : ''}
       <div class="game-thumb" id="thumb-${i}">
-        <canvas id="canvas-${i}"></canvas>
+      <img src="${g.screenshots[0].src}" alt="${g.title}" 
+       style="width:100%; height:100%; object-fit:cover; display:block;">
         <div class="game-engine-tag">${g.engine}</div>
         <div class="game-genre-tag ${g.genre}">${g.genreLabel}</div>
         <div class="game-thumb-overlay"></div>
@@ -268,14 +269,6 @@ function injectGames() {
       </div>
     </div>
   `).join('');
-
-  // Draw canvases
-  requestAnimationFrame(() => {
-    games.forEach((g, i) => {
-      const canvas = document.getElementById('canvas-' + i);
-      if (canvas) drawThumbOnCanvas(canvas, g);
-    });
-  });
 
   // Attach card click + devlog button click listeners
   document.querySelectorAll('.game-card').forEach(card => {
