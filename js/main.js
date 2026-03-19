@@ -24,73 +24,34 @@ const games = [
     desc: 'A card game where you work as a programmer to defeat bugs in your code!',
     colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
     screenshots: [
-      { label: 'TITLE_SCREEN.png',   c1: '#fce8f0', c2: '#f0a0c0', ac: '#e8006a' },
-      { label: 'PUZZLE_ROOM_01.png', c1: '#f8d0e4', c2: '#e880a8', ac: '#cc0055' },
-      { label: 'FLASHBACK_SEQ.png',  c1: '#ffd0e8', c2: '#f090b8', ac: '#ff2080' },
+        { label: "Main Menu",  src: "images/CSWORD1.png" },
+        { label: "Gameplay",   src: "images/CSWORD2.png" },
+        { label: "Gameplay", src: "images/CSWORD3.png" },
     ],
     devlogs: [
-      { date: '2026-03-10', title: 'Launch Week Retrospective',
-        body: 'Shipped ECHOES to Steam after 18 months of dev. Day-one wishlists hit 500, reviews sitting at 91% positive. The non-linear time mechanic confused some players — adding a contextual hint system in v1.1.' },
-      { date: '2026-01-22', title: 'Final Polish Pass',
-        body: 'Locked content, focusing entirely on audio mix and lighting. Replaced the placeholder ambient track with an original generative score that reacts to how many fragments the player has restored.' },
-      { date: '2025-11-04', title: 'Beta Build Impressions',
-        body: 'Sent build to 40 external testers. Biggest pain point: players were unsure which objects were interactable. Added a subtle outline shader on focus — immediately solved 90% of the confusion.' },
-      { date: '2025-07-15', title: 'Core Loop Locked',
-        body: 'After three prototype iterations the "replay & change" mechanic finally feels right. Each fragment is exactly 90 seconds — long enough to feel meaningful, short enough to replay without frustration.' },
+      { date: '27/01/2026', title: 'My role in the project',
+        body: 'A solo school project. Worked on resource management, researched Card Mechanics and Game Design behind different TCG/Card Games.' },
       ]
       },
   {
-    title: 'ECHOES',
-    year: '2026',
-    genre: 'puzzle',
-    genreLabel: 'Puzzle',
-    engine: 'Godot 4',
-    platforms: 'PC · Mac',
-    rating: 4.5,
+    title: 'KINGDOM CORP',
+    year: 'Unreleased',
+    genre: 'Tower Defense',
+    genreLabel: 'TD',
+    engine: 'Unity 3D',
+    platforms: 'PC',
+    rating: 0,
     featured: true,
-    desc: 'A first-person puzzle game about memory and perception. You replay fragments of a single day, changing small things to unlock a greater truth.',
+    desc: 'A tower defense game combined with a resource management sim. Integrated into a call center system where you manage customer queues and complete tasks during your workday to power up your defenses & recruit heroes.',
     colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
     screenshots: [
-      { label: 'TITLE_SCREEN.png',   c1: '#fce8f0', c2: '#f0a0c0', ac: '#e8006a' },
-      { label: 'PUZZLE_ROOM_01.png', c1: '#f8d0e4', c2: '#e880a8', ac: '#cc0055' },
-      { label: 'FLASHBACK_SEQ.png',  c1: '#ffd0e8', c2: '#f090b8', ac: '#ff2080' },
+        { label: "Main Menu",  src: "images" },
+        { label: "Gameplay",   src: "images" },
+        { label: "Gameplay", src: "images" },
     ],
     devlogs: [
-      { date: '2026-03-10', title: 'Launch Week Retrospective',
-        body: 'Shipped ECHOES to Steam after 18 months of dev. Day-one wishlists hit 500, reviews sitting at 91% positive. The non-linear time mechanic confused some players — adding a contextual hint system in v1.1.' },
-      { date: '2026-01-22', title: 'Final Polish Pass',
-        body: 'Locked content, focusing entirely on audio mix and lighting. Replaced the placeholder ambient track with an original generative score that reacts to how many fragments the player has restored.' },
-      { date: '2025-11-04', title: 'Beta Build Impressions',
-        body: 'Sent build to 40 external testers. Biggest pain point: players were unsure which objects were interactable. Added a subtle outline shader on focus — immediately solved 90% of the confusion.' },
-      { date: '2025-07-15', title: 'Core Loop Locked',
-        body: 'After three prototype iterations the "replay & change" mechanic finally feels right. Each fragment is exactly 90 seconds — long enough to feel meaningful, short enough to replay without frustration.' },
-      ]
-      },
-  {
-    title: 'ECHOES',
-    year: '2026',
-    genre: 'puzzle',
-    genreLabel: 'Puzzle',
-    engine: 'Godot 4',
-    platforms: 'PC · Mac',
-    rating: 4.5,
-    featured: true,
-    desc: 'A first-person puzzle game about memory and perception. You replay fragments of a single day, changing small things to unlock a greater truth.',
-    colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
-    screenshots: [
-      { label: 'TITLE_SCREEN.png',   c1: '#fce8f0', c2: '#f0a0c0', ac: '#e8006a' },
-      { label: 'PUZZLE_ROOM_01.png', c1: '#f8d0e4', c2: '#e880a8', ac: '#cc0055' },
-      { label: 'FLASHBACK_SEQ.png',  c1: '#ffd0e8', c2: '#f090b8', ac: '#ff2080' },
-    ],
-    devlogs: [
-      { date: '2026-03-10', title: 'Launch Week Retrospective',
-        body: 'Shipped ECHOES to Steam after 18 months of dev. Day-one wishlists hit 500, reviews sitting at 91% positive. The non-linear time mechanic confused some players — adding a contextual hint system in v1.1.' },
-      { date: '2026-01-22', title: 'Final Polish Pass',
-        body: 'Locked content, focusing entirely on audio mix and lighting. Replaced the placeholder ambient track with an original generative score that reacts to how many fragments the player has restored.' },
-      { date: '2025-11-04', title: 'Beta Build Impressions',
-        body: 'Sent build to 40 external testers. Biggest pain point: players were unsure which objects were interactable. Added a subtle outline shader on focus — immediately solved 90% of the confusion.' },
-      { date: '2025-07-15', title: 'Core Loop Locked',
-        body: 'After three prototype iterations the "replay & change" mechanic finally feels right. Each fragment is exactly 90 seconds — long enough to feel meaningful, short enough to replay without frustration.' },
+      { date: '19/03/2026', title: 'My role in the project',
+        body: 'Worked as the Producer for this project, providing a chance to manage a team, oversee deadlines and coordinate communication.' },
       ]
       },
 ];
@@ -270,47 +231,13 @@ function drawThumbOnCanvas(canvas, game) {
   ctx.globalAlpha = 1;
 }
 
-/* Draw procedural art onto a canvas element using screenshot palette */
-function drawScreenshot(canvas, shot) {
-  const ctx = canvas.getContext('2d');
-  const w = canvas.width  = canvas.offsetWidth  || 560;
-  const h = canvas.height = canvas.offsetHeight || 315;
-
-  const grad = ctx.createLinearGradient(0, 0, w, h);
-  grad.addColorStop(0, shot.c1);
-  grad.addColorStop(1, shot.c2);
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, w, h);
-
-  // Grid
-  ctx.strokeStyle = shot.ac + '22';
-  ctx.lineWidth = 1;
-  for (let x = 0; x < w; x += 40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
-  for (let y = 0; y < h; y += 40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
-
-  // Large glow
-  const rg = ctx.createRadialGradient(w*0.5, h*0.5, 0, w*0.5, h*0.5, w*0.55);
-  rg.addColorStop(0, shot.ac + '40');
-  rg.addColorStop(1, 'transparent');
-  ctx.fillStyle = rg;
-  ctx.fillRect(0, 0, w, h);
-
-  // Pixel particles — denser + larger for the bigger canvas
-  ctx.fillStyle = shot.ac;
-  for (let i = 0; i < 120; i++) {
-    const x     = (Math.sin(i * 53.7 + 1.2) * 0.5 + 0.5) * w;
-    const y     = (Math.cos(i * 37.3 + 0.8) * 0.5 + 0.5) * h;
-    const size  = (Math.sin(i * 19.1) * 0.5 + 0.5) * 5 + 2;
-    const alpha = (Math.sin(i * 31.7) * 0.5 + 0.5) * 0.5 + 0.1;
-    ctx.globalAlpha = alpha;
-    ctx.fillRect(Math.floor(x/4)*4, Math.floor(y/4)*4, size, size);
-  }
-  ctx.globalAlpha = 1;
-
-  // Filename watermark
-  ctx.fillStyle = shot.ac + 'aa';
-  ctx.font = '11px "Share Tech Mono", monospace';
-  ctx.fillText(shot.label, 12, h - 12);
+function drawScreenshot(container, shot) {
+  container.innerHTML = '';
+  const img = document.createElement('img');
+  img.src = shot.src;
+  img.alt = shot.label;
+  img.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block;';
+  container.appendChild(img);
 }
 
 function injectGames() {
@@ -474,17 +401,16 @@ function openPopup(idx) {
   // Draw thumbnail canvases after DOM settled
   requestAnimationFrame(() => {
     thumbsEl.querySelectorAll('.popup-thumb').forEach((el, i) => {
-      const c = document.createElement('canvas');
-      el.appendChild(c);
-      drawScreenshot(c, g.screenshots[i]);
+  // Remove the canvas creation lines, just pass el directly
+  drawScreenshot(el, g.screenshots[i]);
 
-      el.addEventListener('click', () => {
-        thumbsEl.querySelectorAll('.popup-thumb').forEach(t => t.classList.remove('active'));
-        el.classList.add('active');
-        activeScreenshot = i;
-        renderMainScreenshot(g, i);
-      });
-    });
+  el.addEventListener('click', () => {
+    thumbsEl.querySelectorAll('.popup-thumb').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    activeScreenshot = i;
+    renderMainScreenshot(g, i);
+  });
+});
 
     // Main screenshot canvas
     renderMainScreenshot(g, 0);
@@ -512,11 +438,15 @@ function openPopup(idx) {
 }
 
 function renderMainScreenshot(game, idx) {
-  const canvas = document.getElementById('popup-canvas');
-  if (!canvas) return;
-  drawScreenshot(canvas, game.screenshots[idx]);
-  const label = document.getElementById('popup-screenshot-label');
-  if (label) label.textContent = game.screenshots[idx].label;
+  const wrap = document.getElementById('popup-screenshot-wrap');
+  if (!wrap) return;
+  drawScreenshot(wrap, game.screenshots[idx]);
+
+  // Re-append the label since we wiped innerHTML
+  const label = document.createElement('div');
+  label.id = 'popup-screenshot-label';
+  label.textContent = game.screenshots[idx].label;
+  wrap.appendChild(label);
 }
 
 function closePopup() {
