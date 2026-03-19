@@ -14,6 +14,8 @@ const skills = [
 const games = [
  {
     title: 'C-SWORD',
+    itchUrl: 'https://mmispot.itch.io/c-sword',
+    githubUrl: 'https://github.com/mmispot/CardGame',
     year: '2026',
     genre: 'Card Game',
     genreLabel: 'Cards',
@@ -34,7 +36,31 @@ const games = [
       ]
       },
   {
+    title: 'Cafe Catastrophy',
+    itchUrl: 'https://mmispot.itch.io/cafe-catastrophy',
+    githubUrl: 'https://github.com/mmispot/Cafe-CATastropy',
+    year: '2026',
+    genre: 'Local Multiplayer',
+    genreLabel: 'Co-Op',
+    engine: 'Unity 3D',
+    platforms: 'PC',
+    learned: 'Local Multiplayer Mechanics, Game Design, SCRUM Methodology, Team Lead',
+    featured: true,
+    desc: 'A 2 player local co-op (ragebait) game inspired by Overcooked, where the main goal is to deliver as many orders as possible before the timer runs out!',
+    colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
+    screenshots: [
+        { label: "Main Menu",  src: "images/CAFECAT1.png" },
+        { label: "Gameplay",   src: "images/CAFECAT2.png" },
+    ],
+    devlogs: [
+      { date: '20/01/2026', title: 'My role in the project',
+        body: 'I was assigned team lead and worked on managing the team in a relaxed environment, handling communication and task allocation, and helping develop the local multiplayer aspect and level building.' },
+      ]
+      },
+      {
     title: 'KINGDOM CORP',
+    itchUrl: '',
+    githubUrl: '',
     year: 'Unreleased',
     genre: 'Tower Defense',
     genreLabel: 'TD',
@@ -275,9 +301,11 @@ function injectGames() {
           <div class="game-learned">◈ ${g.learned}</div>
         </div>
         <div class="game-links">
-          <div class="game-link" onclick="event.stopPropagation()">▶ PLAY / BUY</div>
-          <div class="game-link" onclick="event.stopPropagation()">◈ ITCH.IO</div>
-          <div class="game-link open-popup-btn" data-index="${i}">◆ DEVLOG</div>
+          <a class="game-link" href="${g.githubUrl || '#'}" 
+          target="_blank" onclick="event.stopPropagation()">▶ GITHUB</a>
+          <a class="game-link" href="${g.itchUrl || '#'}" 
+          target="_blank" onclick="event.stopPropagation()">◈ ITCH.IO</a>
+        <div class="game-link open-popup-btn" data-index="${i}">◆ DEVLOG</div>
         </div>
       </div>
     </div>
