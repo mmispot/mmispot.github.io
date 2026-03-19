@@ -499,17 +499,18 @@ function buildPixelAvatar() {
   const el = document.getElementById('pixel-avatar');
   if (!el) return;
 
-  // 8×8 grid — key: _ bg, g pink, d dark pink, w dark, b white, s shadow pink
-  const art = [
-    '_','_','g','g','g','g','_','_',
-    '_','g','w','w','w','w','g','_',
-    'g','w','b','w','w','b','w','g',
-    'g','w','w','w','w','w','w','g',
-    'g','w','_','w','w','_','w','g',
-    '_','g','w','d','d','w','g','_',
-    '_','_','g','g','g','g','_','_',
-    '_','_','s','g','g','s','_','_',
-  ];
-
-  el.innerHTML = art.map(c => `<div class="${c === '_' ? '' : c}"></div>`).join('');
+  el.innerHTML = '';
+  const img = document.createElement('img');
+  img.src = 'images/miliOS.png';   // change to your image path
+  img.alt = 'Profile photo';
+  img.style.cssText = `
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+    border: 3px solid #f8c8dc;
+    box-shadow: 0 0 12px #e8006a33;
+  `;
+  el.appendChild(img);
 }
