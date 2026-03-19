@@ -12,6 +12,29 @@ const skills = [
 ];
 
 const games = [
+  {
+    title: 'KINGDOM CORP',
+    itchUrl: '',
+    githubUrl: '',
+    year: 'Unreleased',
+    genre: 'TD',
+    genreLabel: 'Tower Defense',
+    engine: 'Unity 3D',
+    platforms: 'PC',
+    learned: 'Team Project Management, Agile Methodologies (SCRUM), Tower Defense Mechanics, Resource Management Mechanics',
+    featured: true,
+    desc: 'A tower defense game combined with a resource management sim. Integrated into a call center system where you manage customer queues and complete tasks during your workday to power up your defenses & recruit heroes.',
+    colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
+    screenshots: [
+        { label: "GamePlay",  src: "images/KINGDOMCORP1.png" },
+        { label: "Gameplay",   src: "images/KINGDOMCORP2.png" },
+        { label: "Gameplay", src: "images/KINGDOMCORP3.png" },
+    ],
+    devlogs: [
+      { date: '19/03/2026', title: 'My role in the project',
+        body: 'Worked as the Producer for this project, providing a chance to manage a team, oversee deadlines and coordinate communication.' },
+      ]
+      },
  {
     title: 'C-SWORD',
     itchUrl: 'https://mmispot.itch.io/c-sword',
@@ -57,27 +80,51 @@ const games = [
         body: 'I was assigned team lead and worked on managing the team in a relaxed environment, handling communication and task allocation, and helping develop the local multiplayer aspect and level building.' },
       ]
       },
-      {
-    title: 'KINGDOM CORP',
-    itchUrl: '',
+{
+    title: 'Cybertheft',
+    itchUrl: 'https://dresartz.itch.io/cybertheft',
     githubUrl: '',
-    year: 'Unreleased',
-    genre: 'Tower Defense',
-    genreLabel: 'TD',
+    year: '2025',
+    genre: 'Twinstick',
+    genreLabel: 'Twinstick',
     engine: 'Unity 3D',
     platforms: 'PC',
-    learned: 'Team Project Management, Agile Methodologies (SCRUM), Tower Defense Mechanics, Resource Management Mechanics',
+    learned: 'First time working with the new Unity Input System, Twinstick Shooter Mechanics, Teamwork, SCRUM Methodology',
     featured: true,
-    desc: 'A tower defense game combined with a resource management sim. Integrated into a call center system where you manage customer queues and complete tasks during your workday to power up your defenses & recruit heroes.',
+    desc: 'In a  futuristic world you are a robot made from scraps breaking into a penthouse form a rich businessman. You have one mission: find and steal the data!',
     colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
     screenshots: [
-        { label: "GamePlay",  src: "images/KINGDOMCORP1.png" },
-        { label: "Gameplay",   src: "images/KINGDOMCORP2.png" },
-        { label: "Gameplay", src: "images/KINGDOMCORP3.png" },
+        { label: "Main Menu",  src: "images/CYBERTHEFT1.png" },
+        { label: "Gameplay",   src: "images/CYBERTHEFT2.png" },
+        { label: "Gameplay",   src: "images/CYBERTHEFT3.png" },
     ],
     devlogs: [
-      { date: '19/03/2026', title: 'My role in the project',
-        body: 'Worked as the Producer for this project, providing a chance to manage a team, oversee deadlines and coordinate communication.' },
+      { date: '11/06/2025', title: 'My role in the project',
+        body: 'I worked on implementing the core gameplay mechanics and managing the new Unity Input System.' },
+      { date: '11/06/2025', title: 'First time using the new Unity Input System',
+        body: 'The Input System isn\'t working as expected, but since learning it through this project, I\'ve used it in every other project since. It was an extremely useful experience.' },
+      ]
+      },
+  {
+    title: 'Peësto Plunderers',
+    itchUrl: 'https://mmispot.itch.io/peestoplunderers',
+    githubUrl: '',
+    year: '2025',
+    genre: 'Shoot-em-up',
+    genreLabel: 'Schmup',
+    engine: 'Unity 3D',
+    platforms: 'PC',
+    learned: 'First team project, basic shoot-em-up mechanics, teamwork, SCRUM Methodology',
+    featured: true,
+    desc: 'Your goal? Take over the Peësto planet so your mothership can conquer the universe with more and more different foods to incorporate into your meals. Lead the Peësto Invasion and beat the king of this world, the Pastapus!',
+    colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
+    screenshots: [
+        { label: "Main Menu",  src: "images/PEESTO1.png" },
+        { label: "Gameplay",   src: "images/PEESTO2.png" },
+    ],
+    devlogs: [
+      { date: '10/04/2025', title: 'My role in the project',
+        body: 'This is the first time I\'ve worked on a team project using the SCRUM methodology.' },
       ]
       },
 ];
