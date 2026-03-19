@@ -171,7 +171,10 @@ function toggleMenu() {
 }
 
 function downloadCV() {
-  alert('[SYS] CV download would trigger here.\nIn production, link to your actual PDF.');
+  const link = document.createElement('a');
+  link.href = 'files/Mili-OS-CV.pdf';        // path to your PDF
+  link.download = 'Mili_CV.pdf';       // filename the user sees when downloading
+  link.click();
 }
 
 // Keyboard shortcuts
