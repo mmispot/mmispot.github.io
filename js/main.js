@@ -19,7 +19,7 @@ const games = [
     genreLabel: 'Cards',
     engine: 'Unity 3D',
     platforms: 'PC · WebGL (itch.io)',
-    rating: 5,
+    learned: 'Card Game Mechanics, Game Design, Solo Project Management',
     featured: true,
     desc: 'A card game where you work as a programmer to defeat bugs in your code!',
     colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
@@ -40,7 +40,7 @@ const games = [
     genreLabel: 'TD',
     engine: 'Unity 3D',
     platforms: 'PC',
-    rating: 0,
+    learned: 'Team Project Management, Agile Methodologies (SCRUM), Tower Defense Mechanics, Resource Management Mechanics',
     featured: true,
     desc: 'A tower defense game combined with a resource management sim. Integrated into a call center system where you manage customer queues and complete tasks during your workday to power up your defenses & recruit heroes.',
     colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
@@ -256,12 +256,9 @@ function injectGames() {
           <div class="game-year">${g.year}</div>
         </div>
         <div class="game-desc">${g.desc}</div>
+        <div class="game-platform">${g.platforms}</div>
         <div class="game-meta-row">
-          <div class="game-rating">
-            ${stars(g.rating)}
-            <span class="game-rating-num">${g.rating}/5</span>
-          </div>
-          <div class="game-platform">${g.platforms}</div>
+          <div class="game-learned">◈ ${g.learned}</div>
         </div>
         <div class="game-links">
           <div class="game-link" onclick="event.stopPropagation()">▶ PLAY / BUY</div>
@@ -343,8 +340,8 @@ function buildPopup() {
               <span class="popup-meta-val" id="pm-year">—</span>
             </div>
             <div class="popup-meta-row">
-              <span class="popup-meta-key">RATING</span>
-              <span class="popup-meta-val" id="pm-rating">—</span>
+                <span class="popup-meta-key">LEARNED</span>
+                <span class="popup-meta-val" id="pm-learned">—</span>
             </div>
           </div>
         </div>
@@ -383,7 +380,7 @@ function openPopup(idx) {
   document.getElementById('pm-platforms').textContent = g.platforms;
   document.getElementById('pm-genre').textContent     = g.genreLabel;
   document.getElementById('pm-year').textContent      = g.year;
-  document.getElementById('pm-rating').innerHTML      = stars(g.rating) + ` <span style="font-size:11px;color:var(--muted);margin-left:4px">${g.rating}/5</span>`;
+  document.getElementById('pm-learned').textContent = g.learned;
 
   // Title + desc
   document.getElementById('popup-game-title').textContent = g.title;
