@@ -33,6 +33,10 @@ const games = [
     devlogs: [
       { date: '19/03/2026', title: 'My role in the project',
         body: 'Worked as the Producer for this project, providing a chance to manage a team, oversee deadlines and coordinate communication.' },
+            { date: '11/06/2025', title: 'What I learned from the project',
+        body: 'My first time in a management role for a team of +- 10 people. I asked extra feedback from my teachers and oversaw the project\'s progress, divided tasks and managed deadlines.' },
+        { date: '15/06/2025', title: 'Credits',
+        body: 'TBA' },
       ]
       },
  {
@@ -56,6 +60,10 @@ const games = [
     devlogs: [
       { date: '27/01/2026', title: 'My role in the project',
         body: 'A solo school project. Worked on resource management, researched Card Mechanics and Game Design behind different TCG/Card Games.' },
+            { date: '11/06/2025', title: 'What I learned from the project',
+        body: 'Card Game Mechanics and Game Design principles. I also made the art (except background and some card sprites) and practiced solo game development.' },
+        { date: '15/06/2025', title: 'Credits',
+        body: 'Developer and Artist: Emilia Beeke' },
       ]
       },
   {
@@ -78,6 +86,10 @@ const games = [
     devlogs: [
       { date: '20/01/2026', title: 'My role in the project',
         body: 'I was assigned team lead and worked on managing the team in a relaxed environment, handling communication and task allocation, and helping develop the local multiplayer aspect and level building.' },
+      { date: '11/06/2025', title: 'What I learned from the project',
+        body: 'Local Multiplayer Mechanics and using different Input Methods (controller and keyboard) at the same time.' },
+        { date: '15/06/2025', title: 'Credits',
+        body: 'Made in 4 weeks time. Developers: Emilia Beeke, Jasper van Dongen. Artists: Kezia, An, Ro.' },
       ]
       },
 {
@@ -101,8 +113,10 @@ const games = [
     devlogs: [
       { date: '11/06/2025', title: 'My role in the project',
         body: 'I worked on implementing the core gameplay mechanics and managing the new Unity Input System.' },
-      { date: '11/06/2025', title: 'First time using the new Unity Input System',
+      { date: '11/06/2025', title: 'What I learned from the project',
         body: 'The Input System isn\'t working as expected, but since learning it through this project, I\'ve used it in every other project since. It was an extremely useful experience.' },
+        { date: '15/06/2025', title: 'Credits',
+        body: 'Developers: Emilia Beeke, Danny, Jayden. Artists: Ro, Finn, Andrea, Aiden, Sherbino' },
       ]
       },
   {
@@ -125,6 +139,31 @@ const games = [
     devlogs: [
       { date: '10/04/2025', title: 'My role in the project',
         body: 'This is the first time I\'ve worked on a team project using the SCRUM methodology.' },
+      { date: '15/06/2025', title: 'Credits',
+        body: 'Made in 3-4 weeks time. Developers: Emilia Beeke, Koen Abbink. Artists: Colin, Arthur, Jochem, Edward, Aiden, Roy.' },
+      ]
+      },
+        {
+    title: 'Pandatama',
+    itchUrl: 'https://mmispot.itch.io/pandatama',
+    githubUrl: '',
+    year: '2025',
+    genre: 'Tamagotchi',
+    genreLabel: 'Tamagotchi',
+    engine: 'HTML',
+    platforms: 'PC, WebGL',
+    learned: 'First game project, basic game mechanics, artwork, interactive design',
+    featured: true,
+    desc: 'My first game project. A web-based tamagotchi where you take care of a panda by feeding it, playing with it and keeping it happy. Made in a week as a school project.',
+    colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
+    screenshots: [
+        { label: "Main Menu",  src: "images/PANDATAMA.png" },
+    ],
+    devlogs: [
+      { date: '10/04/2025', title: 'My role in the project',
+        body: 'This is the first time I\'d programmed a game from scratch, using p5.js.' },
+      { date: '15/06/2025', title: 'Credits',
+        body: 'Made in a week as a school project, I coded and drew everything. My little sister (11 years old) helped with the design and idea for the art.' },
       ]
       },
 ];
@@ -248,7 +287,7 @@ function animateCounter(el, target, duration = 1500) {
 }
 
 function animateCounters() {
-  animateCounter(document.getElementById('count-games'),   5);
+  animateCounter(document.getElementById('count-games'),   6);
   animateCounter(document.getElementById('count-years'),    2);
   animateCounter(document.getElementById('count-jams'),    2);
 }
