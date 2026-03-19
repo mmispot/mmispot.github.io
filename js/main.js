@@ -12,45 +12,87 @@ const skills = [
 ];
 
 const games = [
-  {
-    title: 'C-SWORD',
+ {
+    title: 'ECHOES',
     year: '2026',
-    genre: 'Card Game',
-    genreLabel: 'Card Game',
-    engine: 'Unity 3D',
-    platforms: 'PC · WebGL (itch.io)',
+    genre: 'puzzle',
+    genreLabel: 'Puzzle',
+    engine: 'Godot 4',
+    platforms: 'PC · Mac',
+    rating: 4.5,
     featured: true,
-    desc: 'A card game where play as a programmer, beating bugs in your code to get to game release and win the game!',
-    colorA: '#fce8f0',
-    colorB: '#f8c8dc',
-    accent: '#e8006a',
-  },
+    desc: 'A first-person puzzle game about memory and perception. You replay fragments of a single day, changing small things to unlock a greater truth.',
+    colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
+    screenshots: [
+      { label: 'TITLE_SCREEN.png',   c1: '#fce8f0', c2: '#f0a0c0', ac: '#e8006a' },
+      { label: 'PUZZLE_ROOM_01.png', c1: '#f8d0e4', c2: '#e880a8', ac: '#cc0055' },
+      { label: 'FLASHBACK_SEQ.png',  c1: '#ffd0e8', c2: '#f090b8', ac: '#ff2080' },
+    ],
+    devlogs: [
+      { date: '2026-03-10', title: 'Launch Week Retrospective',
+        body: 'Shipped ECHOES to Steam after 18 months of dev. Day-one wishlists hit 500, reviews sitting at 91% positive. The non-linear time mechanic confused some players — adding a contextual hint system in v1.1.' },
+      { date: '2026-01-22', title: 'Final Polish Pass',
+        body: 'Locked content, focusing entirely on audio mix and lighting. Replaced the placeholder ambient track with an original generative score that reacts to how many fragments the player has restored.' },
+      { date: '2025-11-04', title: 'Beta Build Impressions',
+        body: 'Sent build to 40 external testers. Biggest pain point: players were unsure which objects were interactable. Added a subtle outline shader on focus — immediately solved 90% of the confusion.' },
+      { date: '2025-07-15', title: 'Core Loop Locked',
+        body: 'After three prototype iterations the "replay & change" mechanic finally feels right. Each fragment is exactly 90 seconds — long enough to feel meaningful, short enough to replay without frustration.' },
+      ]
+      },
   {
-    title: 'Cafe Catastrophy',
+    title: 'ECHOES',
     year: '2026',
-    genre: 'Local Multiplayer',
-    genreLabel: 'LMP',
-    engine: 'Unity',
-    platforms: 'PC (itch.io)',
+    genre: 'puzzle',
+    genreLabel: 'Puzzle',
+    engine: 'Godot 4',
+    platforms: 'PC · Mac',
+    rating: 4.5,
     featured: true,
-    desc: 'A 2 player local co-op (ragebait) game inspired by Overcooked, where the main goal is to deliver as many orders as possible before the timer runs out!',
-    colorA: '#f0e0f0',
-    colorB: '#e0c0e8',
-    accent: '#aa00cc',
-  },
+    desc: 'A first-person puzzle game about memory and perception. You replay fragments of a single day, changing small things to unlock a greater truth.',
+    colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
+    screenshots: [
+      { label: 'TITLE_SCREEN.png',   c1: '#fce8f0', c2: '#f0a0c0', ac: '#e8006a' },
+      { label: 'PUZZLE_ROOM_01.png', c1: '#f8d0e4', c2: '#e880a8', ac: '#cc0055' },
+      { label: 'FLASHBACK_SEQ.png',  c1: '#ffd0e8', c2: '#f090b8', ac: '#ff2080' },
+    ],
+    devlogs: [
+      { date: '2026-03-10', title: 'Launch Week Retrospective',
+        body: 'Shipped ECHOES to Steam after 18 months of dev. Day-one wishlists hit 500, reviews sitting at 91% positive. The non-linear time mechanic confused some players — adding a contextual hint system in v1.1.' },
+      { date: '2026-01-22', title: 'Final Polish Pass',
+        body: 'Locked content, focusing entirely on audio mix and lighting. Replaced the placeholder ambient track with an original generative score that reacts to how many fragments the player has restored.' },
+      { date: '2025-11-04', title: 'Beta Build Impressions',
+        body: 'Sent build to 40 external testers. Biggest pain point: players were unsure which objects were interactable. Added a subtle outline shader on focus — immediately solved 90% of the confusion.' },
+      { date: '2025-07-15', title: 'Core Loop Locked',
+        body: 'After three prototype iterations the "replay & change" mechanic finally feels right. Each fragment is exactly 90 seconds — long enough to feel meaningful, short enough to replay without frustration.' },
+      ]
+      },
   {
-    title: 'KINGDOM CORP.exe',
-    year: 'Unreleased',
-    genre: 'Tower Defense',
-    genreLabel: 'TD',
-    engine: 'Unity',
-    platforms: 'PC',
+    title: 'ECHOES',
+    year: '2026',
+    genre: 'puzzle',
+    genreLabel: 'Puzzle',
+    engine: 'Godot 4',
+    platforms: 'PC · Mac',
+    rating: 4.5,
     featured: true,
-    desc: 'A project for a customer recruited by my school. As a producer for this project, I am responsible for project management, team communication, overseeing deadlines and assisting with game design and programming.',
-    colorA: '#f5e8f0',
-    colorB: '#eac8dc',
-    accent: '#cc0066',
-  },
+    desc: 'A first-person puzzle game about memory and perception. You replay fragments of a single day, changing small things to unlock a greater truth.',
+    colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
+    screenshots: [
+      { label: 'TITLE_SCREEN.png',   c1: '#fce8f0', c2: '#f0a0c0', ac: '#e8006a' },
+      { label: 'PUZZLE_ROOM_01.png', c1: '#f8d0e4', c2: '#e880a8', ac: '#cc0055' },
+      { label: 'FLASHBACK_SEQ.png',  c1: '#ffd0e8', c2: '#f090b8', ac: '#ff2080' },
+    ],
+    devlogs: [
+      { date: '2026-03-10', title: 'Launch Week Retrospective',
+        body: 'Shipped ECHOES to Steam after 18 months of dev. Day-one wishlists hit 500, reviews sitting at 91% positive. The non-linear time mechanic confused some players — adding a contextual hint system in v1.1.' },
+      { date: '2026-01-22', title: 'Final Polish Pass',
+        body: 'Locked content, focusing entirely on audio mix and lighting. Replaced the placeholder ambient track with an original generative score that reacts to how many fragments the player has restored.' },
+      { date: '2025-11-04', title: 'Beta Build Impressions',
+        body: 'Sent build to 40 external testers. Biggest pain point: players were unsure which objects were interactable. Added a subtle outline shader on focus — immediately solved 90% of the confusion.' },
+      { date: '2025-07-15', title: 'Core Loop Locked',
+        body: 'After three prototype iterations the "replay & change" mechanic finally feels right. Each fragment is exactly 90 seconds — long enough to feel meaningful, short enough to replay without frustration.' },
+      ]
+      },
 ];
 
 /* ══════════════════════════════════
@@ -189,20 +231,18 @@ function stars(rating) {
   ).join('');
 }
 
-function drawGameThumb(canvas, game) {
+function drawThumbOnCanvas(canvas, game) {
   const ctx = canvas.getContext('2d');
   canvas.width  = canvas.offsetWidth  || 340;
   canvas.height = canvas.offsetHeight || 180;
   const { width: w, height: h } = canvas;
 
-  // Background gradient
   const grad = ctx.createLinearGradient(0, 0, w, h);
   grad.addColorStop(0, game.colorA);
   grad.addColorStop(1, game.colorB);
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, w, h);
 
-  // Grid lines
   ctx.strokeStyle = game.accent + '18';
   ctx.lineWidth = 1;
   for (let x = 0; x < w; x += 32) {
@@ -212,14 +252,12 @@ function drawGameThumb(canvas, game) {
     ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
   }
 
-  // Radial glow blob
   const rg = ctx.createRadialGradient(w * 0.3, h * 0.4, 0, w * 0.3, h * 0.4, w * 0.6);
   rg.addColorStop(0, game.accent + '30');
   rg.addColorStop(1, 'transparent');
   ctx.fillStyle = rg;
   ctx.fillRect(0, 0, w, h);
 
-  // Pixel particles
   ctx.fillStyle = game.accent;
   for (let i = 0; i < 60; i++) {
     const x     = (Math.sin(i * 73.7) * 0.5 + 0.5) * w;
@@ -232,9 +270,52 @@ function drawGameThumb(canvas, game) {
   ctx.globalAlpha = 1;
 }
 
+/* Draw procedural art onto a canvas element using screenshot palette */
+function drawScreenshot(canvas, shot) {
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width  = canvas.offsetWidth  || 560;
+  const h = canvas.height = canvas.offsetHeight || 315;
+
+  const grad = ctx.createLinearGradient(0, 0, w, h);
+  grad.addColorStop(0, shot.c1);
+  grad.addColorStop(1, shot.c2);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+
+  // Grid
+  ctx.strokeStyle = shot.ac + '22';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < w; x += 40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+  for (let y = 0; y < h; y += 40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+
+  // Large glow
+  const rg = ctx.createRadialGradient(w*0.5, h*0.5, 0, w*0.5, h*0.5, w*0.55);
+  rg.addColorStop(0, shot.ac + '40');
+  rg.addColorStop(1, 'transparent');
+  ctx.fillStyle = rg;
+  ctx.fillRect(0, 0, w, h);
+
+  // Pixel particles — denser + larger for the bigger canvas
+  ctx.fillStyle = shot.ac;
+  for (let i = 0; i < 120; i++) {
+    const x     = (Math.sin(i * 53.7 + 1.2) * 0.5 + 0.5) * w;
+    const y     = (Math.cos(i * 37.3 + 0.8) * 0.5 + 0.5) * h;
+    const size  = (Math.sin(i * 19.1) * 0.5 + 0.5) * 5 + 2;
+    const alpha = (Math.sin(i * 31.7) * 0.5 + 0.5) * 0.5 + 0.1;
+    ctx.globalAlpha = alpha;
+    ctx.fillRect(Math.floor(x/4)*4, Math.floor(y/4)*4, size, size);
+  }
+  ctx.globalAlpha = 1;
+
+  // Filename watermark
+  ctx.fillStyle = shot.ac + 'aa';
+  ctx.font = '11px "Share Tech Mono", monospace';
+  ctx.fillText(shot.label, 12, h - 12);
+}
+
 function injectGames() {
   document.getElementById('games-grid').innerHTML = games.map((g, i) => `
-    <div class="game-card">
+    <div class="game-card" data-index="${i}" style="--hover-bg:${g.hoverBg}; --accent:${g.accent};">
       ${g.featured ? '<div class="featured-badge">★ Featured</div>' : ''}
       <div class="game-thumb" id="thumb-${i}">
         <canvas id="canvas-${i}"></canvas>
@@ -256,20 +337,191 @@ function injectGames() {
           <div class="game-platform">${g.platforms}</div>
         </div>
         <div class="game-links">
-          <div class="game-link">▶ PLAY / BUY</div>
-          <div class="game-link">◈ ITCH.IO</div>
-          <div class="game-link">◆ DEVLOG</div>
+          <div class="game-link" onclick="event.stopPropagation()">▶ PLAY / BUY</div>
+          <div class="game-link" onclick="event.stopPropagation()">◈ ITCH.IO</div>
+          <div class="game-link open-popup-btn" data-index="${i}">◆ DEVLOG</div>
         </div>
       </div>
     </div>
   `).join('');
 
+  // Draw canvases
   requestAnimationFrame(() => {
     games.forEach((g, i) => {
       const canvas = document.getElementById('canvas-' + i);
-      if (canvas) drawGameThumb(canvas, g);
+      if (canvas) drawThumbOnCanvas(canvas, g);
     });
   });
+
+  // Attach card click + devlog button click listeners
+  document.querySelectorAll('.game-card').forEach(card => {
+    card.addEventListener('click', () => {
+      openPopup(parseInt(card.dataset.index));
+    });
+  });
+
+  document.querySelectorAll('.open-popup-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      openPopup(parseInt(btn.dataset.index));
+    });
+  });
+}
+
+/* ══════════════════════════════════
+   GAME POPUP
+══════════════════════════════════ */
+
+let activeScreenshot = 0;
+
+function buildPopup() {
+  // Inject popup shell into body once
+  const shell = document.createElement('div');
+  shell.id = 'game-popup-overlay';
+  shell.innerHTML = `
+    <div id="game-popup" role="dialog" aria-modal="true">
+      <div id="popup-bar">
+        <div class="win-dot red"></div>
+        <div class="win-dot amber"></div>
+        <div class="win-dot green"></div>
+        <span id="popup-bar-title">GAME_FILE.dir</span>
+        <button id="popup-close" aria-label="Close">&times;</button>
+      </div>
+
+      <div id="popup-body">
+
+        <!-- LEFT: screenshots + meta -->
+        <div id="popup-left">
+          <div id="popup-screenshot-wrap">
+            <canvas id="popup-canvas"></canvas>
+            <div id="popup-screenshot-label"></div>
+          </div>
+          <div id="popup-thumbs"></div>
+
+          <div id="popup-meta">
+            <div class="popup-meta-row">
+              <span class="popup-meta-key">ENGINE</span>
+              <span class="popup-meta-val" id="pm-engine">—</span>
+            </div>
+            <div class="popup-meta-row">
+              <span class="popup-meta-key">PLATFORMS</span>
+              <span class="popup-meta-val" id="pm-platforms">—</span>
+            </div>
+            <div class="popup-meta-row">
+              <span class="popup-meta-key">GENRE</span>
+              <span class="popup-meta-val" id="pm-genre">—</span>
+            </div>
+            <div class="popup-meta-row">
+              <span class="popup-meta-key">RELEASED</span>
+              <span class="popup-meta-val" id="pm-year">—</span>
+            </div>
+            <div class="popup-meta-row">
+              <span class="popup-meta-key">RATING</span>
+              <span class="popup-meta-val" id="pm-rating">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: devlogs -->
+        <div id="popup-right">
+          <div id="popup-game-title"></div>
+          <div id="popup-game-desc"></div>
+          <div id="popup-devlog-header">
+            <span class="sys-label" style="margin-bottom:0">DEVLOG.entries</span>
+            <span id="popup-devlog-count"></span>
+          </div>
+          <div id="popup-devlogs"></div>
+        </div>
+
+      </div>
+    </div>
+  `;
+  document.body.appendChild(shell);
+
+  document.getElementById('popup-close').addEventListener('click', closePopup);
+  document.getElementById('game-popup-overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('game-popup-overlay')) closePopup();
+  });
+}
+
+function openPopup(idx) {
+  const g = games[idx];
+  activeScreenshot = 0;
+
+  // Bar title
+  document.getElementById('popup-bar-title').textContent = g.title + '.dir // DEVLOG';
+
+  // Meta
+  document.getElementById('pm-engine').textContent    = g.engine;
+  document.getElementById('pm-platforms').textContent = g.platforms;
+  document.getElementById('pm-genre').textContent     = g.genreLabel;
+  document.getElementById('pm-year').textContent      = g.year;
+  document.getElementById('pm-rating').innerHTML      = stars(g.rating) + ` <span style="font-size:11px;color:var(--muted);margin-left:4px">${g.rating}/5</span>`;
+
+  // Title + desc
+  document.getElementById('popup-game-title').textContent = g.title;
+  document.getElementById('popup-game-desc').textContent  = g.desc;
+
+  // Accent colour on popup
+  document.getElementById('game-popup').style.setProperty('--popup-accent', g.accent);
+
+  // Screenshots — thumbnails
+  const thumbsEl = document.getElementById('popup-thumbs');
+  thumbsEl.innerHTML = g.screenshots.map((s, i) =>
+    `<div class="popup-thumb ${i === 0 ? 'active' : ''}" data-shot="${i}"></div>`
+  ).join('');
+
+  // Draw thumbnail canvases after DOM settled
+  requestAnimationFrame(() => {
+    thumbsEl.querySelectorAll('.popup-thumb').forEach((el, i) => {
+      const c = document.createElement('canvas');
+      el.appendChild(c);
+      drawScreenshot(c, g.screenshots[i]);
+
+      el.addEventListener('click', () => {
+        thumbsEl.querySelectorAll('.popup-thumb').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        activeScreenshot = i;
+        renderMainScreenshot(g, i);
+      });
+    });
+
+    // Main screenshot canvas
+    renderMainScreenshot(g, 0);
+  });
+
+  // Screenshot label
+  document.getElementById('popup-screenshot-label').textContent = g.screenshots[0].label;
+
+  // Devlogs
+  document.getElementById('popup-devlog-count').textContent =
+    `[${g.devlogs.length} entries]`;
+
+  document.getElementById('popup-devlogs').innerHTML = g.devlogs.map(d => `
+    <div class="devlog-entry">
+      <div class="devlog-date">${d.date}</div>
+      <div class="devlog-title">${d.title}</div>
+      <div class="devlog-body">${d.body}</div>
+    </div>
+  `).join('');
+
+  // Show overlay
+  const overlay = document.getElementById('game-popup-overlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderMainScreenshot(game, idx) {
+  const canvas = document.getElementById('popup-canvas');
+  if (!canvas) return;
+  drawScreenshot(canvas, game.screenshots[idx]);
+  const label = document.getElementById('popup-screenshot-label');
+  if (label) label.textContent = game.screenshots[idx].label;
+}
+
+function closePopup() {
+  document.getElementById('game-popup-overlay').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 /* ══════════════════════════════════

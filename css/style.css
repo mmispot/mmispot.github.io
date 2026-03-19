@@ -1025,3 +1025,295 @@ body::after {
   .win         { margin: 12px; }
   .games-header{ padding: 24px 24px 0; }
 }
+
+/* ══════════════════════════════════
+   GAME CARD — HOVER COLOUR
+══════════════════════════════════ */
+
+.game-card {
+  /* --hover-bg and --accent are set inline per-card by JS */
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+.game-card:hover {
+  background: var(--hover-bg, #fce8f0);
+  box-shadow: inset 0 0 0 2px var(--accent, #e8006a),
+              0 4px 24px rgba(232, 0, 106, 0.1);
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+.game-card:hover .game-title {
+  color: var(--accent, #e8006a);
+}
+.game-card:hover .game-thumb-overlay {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--hover-bg, #fce8f0) 90%, transparent) 0%,
+    transparent 60%
+  );
+}
+
+/* ══════════════════════════════════
+   POPUP OVERLAY
+══════════════════════════════════ */
+
+#game-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 10, 16, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+#game-popup-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── POPUP WINDOW ── */
+#game-popup {
+  --popup-accent: #e8006a;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  width: 100%;
+  max-width: 980px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 48px rgba(232, 0, 106, 0.12), 0 2px 8px rgba(0,0,0,0.1);
+  transform: translateY(16px) scale(0.98);
+  transition: transform 0.25s ease;
+  overflow: hidden;
+}
+#game-popup-overlay.open #game-popup {
+  transform: translateY(0) scale(1);
+}
+
+/* ── POPUP TITLE BAR ── */
+#popup-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+#popup-bar-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--popup-accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  flex: 1;
+  margin-left: 4px;
+}
+#popup-close {
+  font-size: 18px;
+  line-height: 1;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.15s;
+  font-family: var(--font-mono);
+}
+#popup-close:hover { color: var(--green); }
+
+/* ── POPUP BODY ── */
+#popup-body {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── LEFT COLUMN ── */
+#popup-left {
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+/* Screenshot */
+#popup-screenshot-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--surface);
+  flex-shrink: 0;
+}
+#popup-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+#popup-screenshot-label {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  font-size: 10px;
+  color: var(--muted);
+  background: rgba(253,248,248,0.85);
+  padding: 2px 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+}
+
+/* Thumbnail strip */
+#popup-thumbs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.popup-thumb {
+  flex: 1;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  cursor: pointer;
+  border-right: 1px solid var(--border);
+  position: relative;
+  opacity: 0.55;
+  transition: opacity 0.15s;
+}
+.popup-thumb:last-child { border-right: none; }
+.popup-thumb canvas { width: 100%; height: 100%; display: block; }
+.popup-thumb:hover  { opacity: 0.85; }
+.popup-thumb.active {
+  opacity: 1;
+  outline: 2px solid var(--popup-accent);
+  outline-offset: -2px;
+}
+
+/* Meta table */
+#popup-meta {
+  padding: 16px;
+  flex-shrink: 0;
+}
+.popup-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(240, 200, 216, 0.4);
+  font-size: 11px;
+}
+.popup-meta-row:last-child { border-bottom: none; }
+.popup-meta-key {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.popup-meta-val { color: var(--white); }
+
+/* ── RIGHT COLUMN ── */
+#popup-right {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 28px 32px;
+  gap: 12px;
+}
+
+#popup-game-title {
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--popup-accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 1.1;
+}
+#popup-game-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Devlog header */
+#popup-devlog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+#popup-devlog-count {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+/* Devlog entries */
+#popup-devlogs {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.devlog-entry {
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(240, 200, 216, 0.4);
+  position: relative;
+}
+.devlog-entry:last-child { border-bottom: none; }
+.devlog-entry::before {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: 22px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border-bright);
+  transition: background 0.15s;
+}
+.devlog-entry:hover::before { background: var(--popup-accent); }
+
+.devlog-date {
+  font-size: 10px;
+  color: var(--popup-accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.devlog-title {
+  font-size: 14px;
+  color: var(--white);
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+.devlog-body {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* ── POPUP RESPONSIVE ── */
+@media (max-width: 760px) {
+  #popup-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  #popup-left {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 45vh;
+  }
+  #popup-right { padding: 20px; }
+  #game-popup-overlay { padding: 0; align-items: flex-end; }
+  #game-popup { max-height: 96vh; border-radius: 0; }
+}
