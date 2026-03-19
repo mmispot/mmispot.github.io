@@ -13,15 +13,15 @@ const skills = [
 
 const games = [
  {
-    title: 'ECHOES',
+    title: 'C-SWORD',
     year: '2026',
-    genre: 'puzzle',
-    genreLabel: 'Puzzle',
-    engine: 'Godot 4',
-    platforms: 'PC · Mac',
-    rating: 4.5,
+    genre: 'Card Game',
+    genreLabel: 'Cards',
+    engine: 'Unity 3D',
+    platforms: 'PC · WebGL (itch.io)',
+    rating: 5,
     featured: true,
-    desc: 'A first-person puzzle game about memory and perception. You replay fragments of a single day, changing small things to unlock a greater truth.',
+    desc: 'A card game where you work as a programmer to defeat bugs in your code!',
     colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
     screenshots: [
       { label: 'TITLE_SCREEN.png',   c1: '#fce8f0', c2: '#f0a0c0', ac: '#e8006a' },
@@ -523,6 +523,12 @@ function closePopup() {
   document.getElementById('game-popup-overlay').classList.remove('open');
   document.body.style.overflow = '';
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  buildPopup();
+  injectGames();
+});
+
 
 /* ══════════════════════════════════
    PIXEL AVATAR
