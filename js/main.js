@@ -117,7 +117,20 @@ function navigate(page) {
   document.getElementById('nav-' + page)?.classList.add('active');
   document.getElementById('status-page').textContent = 'PAGE: ' + page.toUpperCase();
   currentPage = page;
-  window.scrollTo(0, 0);
+
+    if (page === 'games') {
+    const header = document.querySelector('.games-header');
+    if (header) header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (page === 'about') {
+    const header = document.querySelector('.about-layout');
+    if (header) header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+   } else if (page === 'home') {
+    const header = document.querySelector('.hero-panel');
+    if (header) header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+   }
+  else {
+    window.scrollTo(0, 0);
+  }
 
   if (page === 'about') {
     setTimeout(() => {
