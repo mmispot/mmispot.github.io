@@ -1,45 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mmispot's Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/png" href="/images/icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEV_PORT.OS — mmispot.exe</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="navbar">
-        <a href="index.html">Home</a>
-        <a href="projectgallery.html">Game Gallery</a>
-        <a href="skills.html">Skills</a>
-        <a href="aboutme.html">About Me</a>
-    </div>
-    <h1 class="animate__bounceIn" class="header">Welcome to mmispot's portfolio!</h1>
-    <div class="hero">
-        <p>Welcome to my portfolio website! Here you can find a selection of my projects, skills, and information about me as a game developer. Feel free to explore and learn more about my work and experiences in the field of game development. Below is my most recently released game!</p>
-        <p>Please go over to the project gallery to see all my games.</p>
 
-        <a href="https://github.com/mmispot" class="fa fa-github" style="font-size:36px; text-decoration: none;" target="_blank"></a>
-        <a href="https://www.linkedin.com/in/emilia-de-boer-060a1228b/" class="fa fa-linkedin" style="font-size:36px; text-decoration: none; margin-left: 10px;" target="_blank"></a>
+<!-- ══════════════════════════════════
+     BOOT SCREEN
+══════════════════════════════════ -->
+<div id="boot-screen">
+  <div class="boot-logo">DEV_OS</div>
+  <div class="boot-text" id="boot-text">Initializing portfolio...</div>
+  <div class="boot-progress-wrap">
+    <div class="boot-progress" id="boot-progress"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     TASKBAR
+══════════════════════════════════ -->
+<nav id="taskbar">
+  <div id="taskbar-left">
+    <div id="os-logo" onclick="navigate('home')">DEV_OS v2.1</div>
+    <div class="taskbar-sep"></div>
+    <button class="taskbar-btn active" id="nav-home"  onclick="navigate('home')">HOME.exe</button>
+    <button class="taskbar-btn"        id="nav-about" onclick="navigate('about')">ABOUT.txt</button>
+    <button class="taskbar-btn"        id="nav-games" onclick="navigate('games')">RELEASES.dir</button>
+  </div>
+  <div id="taskbar-right">
+    <span id="sys-time">--:--:--</span>
+    <button id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════
+     MOBILE MENU
+══════════════════════════════════ -->
+<div id="mobile-menu">
+  <div class="mobile-link" onclick="navigate('home');  toggleMenu()">HOME.exe</div>
+  <div class="mobile-link" onclick="navigate('about'); toggleMenu()">ABOUT.txt</div>
+  <div class="mobile-link" onclick="navigate('games'); toggleMenu()">RELEASES.dir</div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="home-grid">
+
+    <!-- HERO -->
+    <div class="hero-panel">
+      <div class="hero-eyebrow">USER@DEV_OS:~$<span>//</span>portfolio.init</div>
+      <div class="hero-name-wrap">
+        <h1 class="hero-name" data-text="EMILIA&nbsp;BEEKE">EMILIA&nbsp;<em>BEEKE</em></h1>
+      </div>
+      <p class="hero-tagline">
+        Junior game developer &amp; student at Grafisch Lyceum Utrecht.
+        C# and Unity 3D Developer.<br>
+        
+        <strong style="color:var(--white)">Currently open for internship contracts.</strong>
+      </p>
+      <div class="hero-cta-row">
+        <button class="btn btn-primary" onclick="navigate('games')">VIEW_RELEASES.dir</button>
+        <button class="btn btn-ghost"   onclick="navigate('about')">READ_ABOUT.txt</button>
+      </div>
     </div>
-    <!-- <div class="textbox">
-        <h5>Newest release:</h5>
-        
-        <iframe frameborder="0" src="https://itch.io/embed/4230500" width="552" height="167"><a hr<iframe width="560" height="315" src="https://www.youtube.com/embed/d4YlyCIYojc?si=P93JsINLXK3PuRJV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>ef="https://mmispot.itch.io/c-sword">C SWORD by Emilia</a></iframe>
-        <p>A card game made by just me, where you work as a programmer beating bugs in your code. The ultimate goal is game release! Try to make it through the enemies and events without dying...</p>
-    </div> -->
-        <section class="devblog-preview">
-            <h3 class="title">Latest DevBlog Update</h3>
-            <div id="latest-post">
+
+    <!-- STATS -->
+    <div class="stats-panel">
+      <div class="sys-label">system_metrics.log</div>
+      <div class="stat-block">
+        <div class="stat-num" id="count-games">0</div>
+        <div class="stat-label">Games made</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" id="count-years">0</div>
+        <div class="stat-label">Years active</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" id="count-jams">0</div>
+        <div class="stat-label">Game jams entered</div>
+      </div>
+    </div>
+
+    <!-- ACTIVITY LOG -->
+    <div class="activity-panel">
+      <div class="sys-label" style="margin-bottom:16px">activity_log.sys</div>
+      <div class="log-line">
+        <div class="log-time">27/01/2026</div>
+        <div class="log-event"><strong>C-SWORD</strong> — released</div>
+        <div class="log-status ok">[OK]</div>
+      </div>
+      <div class="log-line">
+        <div class="log-time">20/01/2026</div>
+        <div class="log-event"><strong>Cafe Catastrophy</strong> — SCRUM method team project</div>
+        <div class="log-status ok">[OK]</div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="contact-panel">
+      <div class="sys-label" style="margin-bottom:16px">contact_routes.cfg</div>
+      <div class="contact-row">
+        <span class="contact-icon">⌘</span>
+        <span>mmispot.dev@gmail.com</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">◈</span>
+        <span><a href="https://mmispot.itch.io/" target="_blank">Itch.io</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">◉</span>
+        <span><a href="https://github.com/mmispot" target="_blank">GitHub</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-icon">◉</span>
+        <span><a href="https://www.linkedin.com/in/emilia-de-boer-060a1228b/" target="_blank">LinkedIn</a></span>
+      </div>
+    </div>
+
+  </div><!-- /home-grid -->
+
+  <!-- MARQUEE -->
+  <!-- <div class="boot-bar">
+    <div class="boot-bar-inner">
+      [SYS] AVAILABLE FOR FREELANCE &nbsp;&nbsp;◆&nbsp;&nbsp;
+      UNITY · GODOT · UNREAL · LÖVE2D · GAMEMAKER &nbsp;&nbsp;◆&nbsp;&nbsp;
+      GAME DESIGN · PROGRAMMING · PIXEL ART · SOUND DESIGN &nbsp;&nbsp;◆&nbsp;&nbsp;
+      INDIE · JAM WINNER · OPEN SOURCE CONTRIBUTOR &nbsp;&nbsp;◆&nbsp;&nbsp;
+      BASED IN AMSTERDAM, NL &nbsp;&nbsp;◆&nbsp;&nbsp;
+      AVAILABLE FOR FREELANCE &nbsp;&nbsp;◆&nbsp;&nbsp;
+      OPEN TO REMOTE COLLABORATION &nbsp;&nbsp;◆&nbsp;&nbsp;
+    </div>
+  </div> -->
+</div><!-- /page-home -->
+
+<!-- ══════════════════════════════════
+     PAGE: ABOUT
+══════════════════════════════════ -->
+<div id="page-about" class="page">
+  <div class="about-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="about-sidebar">
+      <div class="avatar-box">
+        <div class="avatar-pixel" id="pixel-avatar"></div>
+      </div>
+
+      <div class="sidebar-name">EMILIA BEEKE</div>
+      <div class="sidebar-role">Junior Game Dev</div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-item">
+        <div class="sidebar-item-label">Location</div>
+        <div class="sidebar-item-val">Ter Aar, NL</div>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-item-label">Status</div>
+        <div class="sidebar-item-val available">
+          <span class="status-dot"></span>Available
+        </div>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-item-label">Primary Engine</div>
+        <div class="sidebar-item-val">Unity</div>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-item-label">Experience</div>
+        <div class="sidebar-item-val">2+ Years</div>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-item-label">Languages</div>
+        <div class="sidebar-item-val">C# · HTML · CSS · JS</div>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-item-label">Specialisation</div>
+        <div class="sidebar-item-val">Management · Planning · Creative Insight</div>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-item-label">Education</div>
+        <div class="sidebar-item-val">GLU Software Development, Utrecht, NL</div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <button class="btn btn-ghost"
+              style="width:100%;margin-top:8px;font-size:11px;"
+              onclick="downloadCV()">
+        ↓ DOWNLOAD_CV.pdf
+      </button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="about-main">
+
+      <!-- INTRODUCTION -->
+      <div class="about-section">
+        <div class="about-section-header">// INTRODUCTION</div>
+        <div class="about-section-sub">README.txt — personal.log</div>
+        <p class="about-text">
+          I'm <strong>Emilia Beeke</strong>, a game developer who believes games are more than just fun,
+          and can be used to convey messages and bring people together. My first experience with coding
+          started when I was just 11 years old, making simple projects in Scratch. I later moved on to
+          trying out Python and Unity.
+        </p>
+        <br>
+        <p class="about-text">
+          Today I build <em>indie games</em> in a team, created by my school. We get put in a small team,
+          and start work using the SCRUM-method. 
+        </p>
+        <br>
+        <!-- <p class="about-text">
+          If you want to collaborate, commission a prototype, or just talk shop about
+          procedural generation — reach out. The inbox is always open.
+        </p> -->
+      </div>
+
+      <!-- SKILLS -->
+      <div class="about-section">
+        <div class="about-section-header">// SKILLS</div>
+        <div class="about-section-sub">skill_matrix.cfg — loaded [6/6]</div>
+        <div class="skills-grid" id="skills-grid">
+          <!-- Injected by js/main.js → injectSkills() -->
+        </div>
+      </div>
+
+      <!-- TOOLS & ENGINES -->
+      <div class="about-section">
+        <div class="about-section-header">// TOOLS &amp; ENGINES</div>
+        <div class="about-section-sub">software_inventory.sys</div>
+        <div class="tag-row">
+          <div class="tag">Unity</div>
+          <div class="tag">Aseprite</div>
+          <div class="tag">Blender</div>
+          <div class="tag">Git</div>
+          <div class="tag">Trello</div>
+          <div class="tag">SCRUM</div>
+          <div class="tag">VS Code</div>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <!-- <div class="about-section">
+        <div class="about-section-header">// EXPERIENCE</div>
+        <div class="about-section-sub">work_history.log — sorted DESC</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2022 — PRESENT</div>
+            <div class="timeline-role">Solo Indie Developer</div>
+            <div class="timeline-company">Self-employed</div>
+            <div class="timeline-desc">
+              Designing, programming, and publishing original games to Steam and itch.io.
+              Handling all aspects of production, marketing, and community management.
             </div>
-        </section>
-        
-        
-        <script src="script.js"></script>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2020 — 2022</div>
+            <div class="timeline-role">Junior Game Programmer</div>
+            <div class="timeline-company">Guerrilla Games — Amsterdam</div>
+            <div class="timeline-desc">
+              Worked on gameplay systems for Horizon Forbidden West. Wrote C++ gameplay code
+              and worked closely with design and QA teams on enemy AI behaviour trees.
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2018 — 2020</div>
+            <div class="timeline-role">Game Development Intern</div>
+            <div class="timeline-company">Abstraction Games — Rotterdam</div>
+            <div class="timeline-desc">
+              Ported and adapted indie titles to console platforms. Gained deep experience
+              with cross-platform build pipelines and console SDK constraints.
+            </div>
+          </div> -->
+          <div class="timeline-item">
+            <div class="timeline-date">2023 — PRESENT</div>
+            <div class="timeline-role">Software Developer &amp; Hobbyist</div>
+            <div class="timeline-company">Various Game Jam Teams, School Teams and Personal Projects</div>
+            <div class="timeline-desc">
+              Built small-scaled games in Unity, both solo and in teams, for game jams and school projects. Gained experience
+              with everything from project management and team communication to gameplay programming, building a game and
+              working together with artists.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div><!-- /page-about -->
+
+<!-- ══════════════════════════════════
+     PAGE: GAMES
+══════════════════════════════════ -->
+<div id="page-games" class="page">
+  <div class="games-header">
+    <div class="games-title">RELEASES.dir</div>
+    <div class="games-subtitle">listing 3 of 3 entries // sorted by date DESC</div>
+  </div>
+  <div class="games-grid" id="games-grid">
+    <!-- Injected by js/main.js → injectGames() -->
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     STATUS BAR
+══════════════════════════════════ -->
+<div id="status-bar">
+  <div class="status-item"><div class="dot green"></div> ONLINE</div>
+  <div class="status-item"><div class="dot green"></div> PORTFOLIO.OS v2.1</div>
+  <div class="status-item"><div class="dot amber"></div> WIP: KINGDOM CORP</div>
+  <div class="status-right">
+    <div class="status-item">BAUD: 115K</div>
+    <div class="status-item">MEM: 42.0MB</div>
+    <div class="status-item" id="status-page">PAGE: HOME</div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
 </body>
-<footer>
-    <p>© 2025 Mmispot. All rights reserved. This portfolio is entirely personal and made by myself.</p>
-</footer>
 </html>
