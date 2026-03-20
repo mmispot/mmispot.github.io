@@ -201,6 +201,7 @@ function bootStep() {
       animateCounters();
       injectSkills();
       injectGames();
+      injectGallery();
       buildPixelAvatar();
     }, 400);
   }
@@ -261,8 +262,8 @@ function toggleMenu() {
 
 function downloadCV() {
   const link = document.createElement('a');
-  link.href = 'files/Mili-OS-CV.pdf';        // path to your PDF
-  link.download = 'Mili_CV.pdf';       // filename the user sees when downloading
+  link.href = 'files/Mili-OS-CV.pdf';
+  link.download = 'Mili_CV.pdf';
   link.click();
 }
 
@@ -414,6 +415,46 @@ function injectGames() {
 }
 
 /* ══════════════════════════════════
+   GALLERY (horizontal strip on games page)
+══════════════════════════════════ */
+
+function injectGallery() {
+  const track = document.getElementById('gallery-track');
+  if (!track) return;
+
+  track.innerHTML = games.map((g, i) => `
+    <div class="gallery-card" data-index="${i}" title="Open devlog: ${g.title}">
+      <div class="gallery-card-thumb">
+        <img src="${g.screenshots[0].src}" alt="${g.title}" loading="lazy">
+        <div class="gallery-card-genre">${g.genreLabel}</div>
+      </div>
+      <div class="gallery-card-body">
+        <div class="gallery-card-title">${g.title}</div>
+        <div class="gallery-card-meta">
+          <span class="gallery-card-engine">${g.engine}</span>
+          <span>${g.year}</span>
+        </div>
+        <div class="gallery-card-cta">◆ VIEW DEVLOG</div>
+      </div>
+    </div>
+  `).join('');
+
+  // Click opens the popup
+  track.querySelectorAll('.gallery-card').forEach(card => {
+    card.addEventListener('click', () => openPopup(parseInt(card.dataset.index)));
+  });
+
+  // Arrow buttons
+  const SCROLL_AMOUNT = 224; // card width (200) + gap (12) + a bit
+  document.getElementById('gallery-prev')?.addEventListener('click', () => {
+    track.scrollBy({ left: -SCROLL_AMOUNT, behavior: 'smooth' });
+  });
+  document.getElementById('gallery-next')?.addEventListener('click', () => {
+    track.scrollBy({ left: SCROLL_AMOUNT, behavior: 'smooth' });
+  });
+}
+
+/* ══════════════════════════════════
    GAME POPUP
 ══════════════════════════════════ */
 
@@ -479,8 +520,6 @@ function buildPopup() {
           <div id="popup-links"></div>
         </div>
 
-
-
       </div>
     </div>
   `;
@@ -522,16 +561,15 @@ function openPopup(idx) {
   // Draw thumbnail canvases after DOM settled
   requestAnimationFrame(() => {
     thumbsEl.querySelectorAll('.popup-thumb').forEach((el, i) => {
-  // Remove the canvas creation lines, just pass el directly
-  drawScreenshot(el, g.screenshots[i]);
+      drawScreenshot(el, g.screenshots[i]);
 
-  el.addEventListener('click', () => {
-    thumbsEl.querySelectorAll('.popup-thumb').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-    activeScreenshot = i;
-    renderMainScreenshot(g, i);
-  });
-});
+      el.addEventListener('click', () => {
+        thumbsEl.querySelectorAll('.popup-thumb').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        activeScreenshot = i;
+        renderMainScreenshot(g, i);
+      });
+    });
 
     // Main screenshot canvas
     renderMainScreenshot(g, 0);
@@ -585,6 +623,7 @@ function closePopup() {
 window.addEventListener("DOMContentLoaded", () => {
   buildPopup();
   injectGames();
+  injectGallery();
 });
 
 
@@ -598,7 +637,7 @@ function buildPixelAvatar() {
 
   el.innerHTML = '';
   const img = document.createElement('img');
-  img.src = 'images/miliOS.png';   // change to your image path
+  img.src = 'images/miliOS.png';
   img.alt = 'Profile photo';
   img.style.cssText = `
     width: 100%;

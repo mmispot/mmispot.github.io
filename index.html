@@ -71,20 +71,11 @@
       </div>
     </div>
 
-    <!-- STATS -->
-    <div class="stats-panel">
-      <div class="sys-label">system_metrics.log</div>
-      <div class="stat-block">
-        <div class="stat-num" id="count-games">0</div>
-        <div class="stat-label">Games made</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-num" id="count-years">0</div>
-        <div class="stat-label">Years active</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-num" id="count-jams">0</div>
-        <div class="stat-label">Game jams entered</div>
+    <!-- GAMES GRID (formerly stats position) -->
+    <div class="stats-panel games-home-panel">
+      <div class="sys-label">releases_preview.dir</div>
+      <div class="games-grid-home" id="games-grid">
+        <!-- Injected by js/main.js → injectGames() -->
       </div>
     </div>
 
@@ -235,10 +226,6 @@
           and start work using the SCRUM-method. 
         </p>
         <br>
-        <!-- <p class="about-text">
-          If you want to collaborate, commission a prototype, or just talk shop about
-          procedural generation — reach out. The inbox is always open.
-        </p> -->
       </div>
 
       <!-- SKILLS -->
@@ -266,37 +253,6 @@
       </div>
 
       <!-- EXPERIENCE -->
-      <!-- <div class="about-section">
-        <div class="about-section-header">// EXPERIENCE</div>
-        <div class="about-section-sub">work_history.log — sorted DESC</div>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-date">2022 — PRESENT</div>
-            <div class="timeline-role">Solo Indie Developer</div>
-            <div class="timeline-company">Self-employed</div>
-            <div class="timeline-desc">
-              Designing, programming, and publishing original games to Steam and itch.io.
-              Handling all aspects of production, marketing, and community management.
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2020 — 2022</div>
-            <div class="timeline-role">Junior Game Programmer</div>
-            <div class="timeline-company">Guerrilla Games — Amsterdam</div>
-            <div class="timeline-desc">
-              Worked on gameplay systems for Horizon Forbidden West. Wrote C++ gameplay code
-              and worked closely with design and QA teams on enemy AI behaviour trees.
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2018 — 2020</div>
-            <div class="timeline-role">Game Development Intern</div>
-            <div class="timeline-company">Abstraction Games — Rotterdam</div>
-            <div class="timeline-desc">
-              Ported and adapted indie titles to console platforms. Gained deep experience
-              with cross-platform build pipelines and console SDK constraints.
-            </div>
-          </div> -->
           <div class="timeline-item">
             <div class="timeline-date">2023 — PRESENT</div>
             <div class="timeline-role">Software Developer &amp; Hobbyist</div>
@@ -315,16 +271,48 @@
 </div><!-- /page-about -->
 
 <!-- ══════════════════════════════════
-     PAGE: GAMES
+     PAGE: GAMES (now shows stats)
 ══════════════════════════════════ -->
 <div id="page-games" class="page">
   <div class="games-header">
     <div class="games-title">RELEASES.dir</div>
     <div class="games-subtitle">listing 6 of 6 entries // sorted by release date</div>
   </div>
-  <div class="games-grid" id="games-grid">
-    <!-- Injected by js/main.js → injectGames() -->
-     
+
+  <!-- STATS + GALLERY ROW -->
+  <div class="games-page-body">
+
+    <!-- LEFT: stats -->
+    <div class="stats-page-panel">
+      <div class="sys-label" style="margin-bottom: 8px;">system_metrics.log</div>
+      <div class="stats-page-blocks">
+        <div class="stat-block">
+          <div class="stat-num" id="count-games">0</div>
+          <div class="stat-label">Games made</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num" id="count-years">0</div>
+          <div class="stat-label">Years active</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num" id="count-jams">0</div>
+          <div class="stat-label">Game jams entered</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: horizontal gallery -->
+    <div class="gallery-panel">
+      <div class="sys-label" style="margin-bottom: 12px;">gallery.strip // click to open devlog</div>
+      <div class="gallery-track-wrap">
+        <button class="gallery-arrow gallery-arrow-left" id="gallery-prev" aria-label="Scroll left">&#8249;</button>
+        <div class="gallery-track" id="gallery-track">
+          <!-- Injected by js/main.js → injectGallery() -->
+        </div>
+        <button class="gallery-arrow gallery-arrow-right" id="gallery-next" aria-label="Scroll right">&#8250;</button>
+      </div>
+    </div>
+
   </div>
 </div>
 

@@ -484,7 +484,10 @@ body::after {
   flex-wrap: wrap;
 }
 
-/* Stats panel */
+/* ══════════════════════════════════
+   STATS PANEL (original — kept for
+   reference / mobile responsive)
+══════════════════════════════════ */
 .stats-panel {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
@@ -494,6 +497,114 @@ body::after {
   flex-direction: column;
   gap: 24px;
 }
+
+/* ══════════════════════════════════
+   GAMES HOME PANEL
+   (games grid in the stats slot)
+══════════════════════════════════ */
+.games-home-panel {
+  /* Override stats-panel defaults */
+  padding: 20px 20px 0 20px !important;
+  gap: 0 !important;
+  overflow-y: auto;
+  /* Match the hero panel height exactly */
+  max-height: calc(100vh - 36px - 120px);
+  min-height: calc(100vh - 36px - 120px);
+}
+
+/* Compact game grid inside the home panel */
+.games-grid-home {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 12px;
+}
+
+/* Override game-card sizing for compact home view */
+.games-home-panel .game-card {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  min-height: unset;
+}
+
+.games-home-panel .game-thumb {
+  width: 100px;
+  height: 70px;
+  flex-shrink: 0;
+}
+
+.games-home-panel .game-info {
+  padding: 10px 14px;
+}
+
+.games-home-panel .game-title {
+  font-size: 11px;
+}
+
+.games-home-panel .game-desc {
+  display: none; /* hide description in compact view */
+}
+
+.games-home-panel .game-meta-row {
+  padding-top: 6px;
+  margin-top: 4px;
+}
+
+.games-home-panel .game-learned {
+  display: none; /* hide learned in compact view */
+}
+
+.games-home-panel .game-links {
+  margin-top: 6px;
+}
+
+.games-home-panel .game-link {
+  font-size: 9px;
+  padding: 3px 8px;
+}
+
+.games-home-panel .featured-badge {
+  font-size: 8px;
+  padding: 2px 6px;
+}
+
+.games-home-panel .game-engine-tag {
+  font-size: 8px;
+  padding: 2px 5px;
+  top: 6px; right: 6px;
+}
+
+.games-home-panel .game-genre-tag {
+  font-size: 8px;
+  padding: 2px 5px;
+  top: 6px; left: 6px;
+}
+
+/* ══════════════════════════════════
+   STATS PAGE PANEL
+   (stats displayed on games page)
+══════════════════════════════════ */
+/* stats-page-panel padding handled inside .games-page-body above */
+
+.stats-page-blocks {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.stats-page-panel .stat-block {
+  border-left: 2px solid var(--border);
+  padding-left: 20px;
+  transition: border-color 0.2s;
+}
+.stats-page-panel .stat-block:hover { border-left-color: var(--green); }
+
+/* ══════════════════════════════════
+   STAT BLOCKS (shared)
+══════════════════════════════════ */
 .stat-block {
   border-left: 2px solid var(--border);
   padding-left: 20px;
@@ -983,6 +1094,185 @@ body::after {
 }
 
 /* ══════════════════════════════════
+   GAMES PAGE BODY (stats + gallery)
+══════════════════════════════════ */
+.games-page-body {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  border-bottom: 1px solid var(--border);
+  min-height: 260px;
+}
+
+/* ── STATS left column ── */
+.stats-page-panel {
+  padding: 40px 36px;
+  border-right: 1px solid var(--border);
+}
+
+.stats-page-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 16px;
+}
+
+/* ── GALLERY right column ── */
+.gallery-panel {
+  padding: 28px 24px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.gallery-track-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding: 8px 4px 12px;
+  flex: 1;
+  /* hide scrollbar visually but keep functionality */
+  scrollbar-width: none;
+}
+.gallery-track::-webkit-scrollbar { display: none; }
+
+/* ── GALLERY CARD ── */
+.gallery-card {
+  flex-shrink: 0;
+  width: 200px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.gallery-card:hover {
+  border-color: var(--green);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(232, 0, 106, 0.12);
+}
+
+.gallery-card-thumb {
+  width: 100%;
+  height: 112px;
+  overflow: hidden;
+  position: relative;
+  background: var(--surface);
+}
+.gallery-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.gallery-card:hover .gallery-card-thumb img {
+  transform: scale(1.05);
+}
+
+.gallery-card-genre {
+  position: absolute;
+  top: 6px; left: 6px;
+  font-size: 8px;
+  padding: 2px 6px;
+  background: rgba(253, 248, 248, 0.9);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.gallery-card-body {
+  padding: 10px 12px 12px;
+}
+.gallery-card-title {
+  font-family: var(--font-title);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s;
+}
+.gallery-card:hover .gallery-card-title {
+  color: var(--green);
+  text-shadow: var(--glow-green);
+}
+.gallery-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.gallery-card-engine {
+  color: var(--amber);
+}
+.gallery-card-cta {
+  font-size: 9px;
+  color: var(--green);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-top: 1px solid var(--border);
+  padding-top: 7px;
+  margin-top: 2px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.gallery-card:hover .gallery-card-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── GALLERY ARROWS ── */
+.gallery-arrow {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  font-family: var(--font-mono);
+  z-index: 2;
+  align-self: center;
+}
+.gallery-arrow:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(232, 0, 106, 0.05);
+  text-shadow: var(--glow-green);
+}
+.gallery-arrow-left  { margin-right: 8px; }
+.gallery-arrow-right { margin-left: 8px; }
+
+/* ══════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════ */
 @media (max-width: 900px) {
@@ -996,6 +1286,18 @@ body::after {
     flex-wrap: wrap;
     gap: 16px;
   }
+  .games-home-panel {
+    max-height: none !important;
+    min-height: unset !important;
+    overflow-y: visible;
+  }
+  .games-home-panel .game-card {
+    grid-template-columns: 80px 1fr;
+  }
+  .games-home-panel .game-thumb {
+    width: 80px;
+    height: 60px;
+  }
   .activity-panel { grid-column: 1; grid-row: 3; border-right: none; }
   .contact-panel  { grid-column: 1; grid-row: 4; }
   .about-layout   { grid-template-columns: 1fr; }
@@ -1005,12 +1307,25 @@ body::after {
   .taskbar-btn    { display: none; }
   #hamburger      { display: flex; }
   .stat-num       { font-size: 36px; }
+  .games-page-body {
+    grid-template-columns: 1fr;
+  }
+  .stats-page-panel {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 28px 24px;
+  }
+  .stats-page-blocks { flex-direction: row; flex-wrap: wrap; gap: 20px; }
+  .gallery-panel { padding: 20px; }
+  .gallery-card { width: 160px; }
+  .gallery-card-thumb { height: 90px; }
 }
 
 @media (max-width: 600px) {
   .hero-panel  { padding: 40px 24px; }
   .win         { margin: 12px; }
   .games-header{ padding: 24px 24px 0; }
+  .stats-page-panel { padding: 32px 24px; }
 }
 
 /* ══════════════════════════════════
@@ -1037,6 +1352,11 @@ body::after {
     color-mix(in srgb, var(--hover-bg, #fce8f0) 90%, transparent) 0%,
     transparent 60%
   );
+}
+
+/* Suppress transform on compact home panel cards */
+.games-home-panel .game-card:hover {
+  transform: none;
 }
 
 /* ══════════════════════════════════
