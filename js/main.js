@@ -6,7 +6,7 @@ const skills = [
   { name: 'Game Design',          pct: 92, tag: 'Core' },
   { name: 'Team Management',      pct: 72, tag: 'Core' },
   { name: 'C# / Unity',           pct: 88, tag: 'Programming' },
-  { name: 'Level Design',         pct: 85, tag: 'Design' },
+  { name: 'Technical Design',     pct: 85, tag: 'Design' },
   { name: 'UI / UX (Games)',      pct: 82, tag: 'Design' },
   { name: 'Serious Games',        pct: 90, tag: 'Design' },
   { name: 'Git / Version Ctrl',   pct: 90, tag: 'Tools' },
