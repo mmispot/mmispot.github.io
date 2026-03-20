@@ -18,7 +18,7 @@ const games = [
   {
     title: 'KINGDOM CORP',
     itchUrl: '',
-    githubUrl: '',
+    githubUrl: 'https://gist.github.com/mmispot/834e98454f7add3506319196d4a3e97b',
     year: 'Unreleased',
     genre: 'Tower Defense',
     genreLabel: 'Gamification',
@@ -45,7 +45,7 @@ const games = [
  {
     title: 'C-SWORD',
     itchUrl: 'https://mmispot.itch.io/c-sword',
-    githubUrl: 'https://github.com/mmispot/CardGame',
+    githubUrl: 'https://gist.github.com/mmispot/54b4fad28c0359a85999e77578124c47',
     year: '2026',
     genre: 'Card Game',
     genreLabel: 'Cards',
@@ -72,7 +72,7 @@ const games = [
   {
     title: 'Cafe Catastrophy',
     itchUrl: 'https://mmispot.itch.io/cafe-catastrophy',
-    githubUrl: 'https://github.com/mmispot/Cafe-CATastropy',
+    githubUrl: 'https://gist.github.com/mmispot/a3798ab312195da898019ac6307742cc',
     year: '2026',
     genre: 'Local Multiplayer',
     genreLabel: 'Co-Op',
