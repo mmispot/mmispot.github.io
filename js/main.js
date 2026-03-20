@@ -301,9 +301,7 @@ function injectSkills() {
     <div class="skill-card">
       <div class="skill-name">${s.name}</div>
       <div class="skill-bar-wrap">
-        <div class="skill-bar-fill" style="--pct:${s.pct}%">
-          <span class="skill-pct">${s.pct}%</span>
-        </div>
+        <div class="skill-bar-fill" style="--pct:${s.pct}%"></div>
       </div>
       <div class="skill-tag">[${s.tag}]</div>
     </div>
