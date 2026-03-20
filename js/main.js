@@ -3,13 +3,15 @@
 ══════════════════════════════════ */
 
 const skills = [
-  { name: 'Game Design',          pct: 92, tag: 'Core' },
-  { name: 'Team Management',      pct: 72, tag: 'Core' },
-  { name: 'C# / Unity',           pct: 88, tag: 'Programming' },
-  { name: 'Technical Design',     pct: 85, tag: 'Design' },
-  { name: 'UI / UX (Games)',      pct: 82, tag: 'Design' },
-  { name: 'Serious Games',        pct: 90, tag: 'Design' },
-  { name: 'Git / Version Ctrl',   pct: 90, tag: 'Tools' },
+  { name: 'Game Design',          pct: 100, tag: 'Core' },
+  { name: 'Team Management',      pct: 100, tag: 'Core' },
+  { name: 'SCRUM Master',         pct: 100, tag: 'Core' },
+  { name: 'Producer',             pct: 100, tag: 'Core' },
+  { name: 'C# / Unity',           pct: 100, tag: 'Programming' },
+  { name: 'Technical Design',     pct: 100, tag: 'Design' },
+  { name: 'UI / UX (Games)',      pct: 100, tag: 'Design' },
+  { name: 'Serious Games',        pct: 100, tag: 'Design' },
+  { name: 'Git / Version Ctrl',   pct: 100, tag: 'Tools' },
 ];
 
 const games = [
