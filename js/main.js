@@ -3,12 +3,13 @@
 ══════════════════════════════════ */
 
 const skills = [
-  { name: 'Game Design',       pct: 92, tag: 'Core' },
+  { name: 'Game Design',          pct: 92, tag: 'Core' },
   { name: 'Team Management',      pct: 72, tag: 'Core' },
-  { name: 'C# / Unity',        pct: 88, tag: 'Programming' },
-  { name: 'Level Design',      pct: 85, tag: 'Design' },
-  { name: 'UI / UX (Games)',   pct: 82, tag: 'Design' },
-  { name: 'Git / Version Ctrl',pct: 90, tag: 'Tools' },
+  { name: 'C# / Unity',           pct: 88, tag: 'Programming' },
+  { name: 'Level Design',         pct: 85, tag: 'Design' },
+  { name: 'UI / UX (Games)',      pct: 82, tag: 'Design' },
+  { name: 'Serious Games',        pct: 90, tag: 'Design' },
+  { name: 'Git / Version Ctrl',   pct: 90, tag: 'Tools' },
 ];
 
 const games = [
@@ -17,8 +18,8 @@ const games = [
     itchUrl: '',
     githubUrl: '',
     year: 'Unreleased',
-    genre: 'TD',
-    genreLabel: 'Tower Defense',
+    genre: 'Tower Defense',
+    genreLabel: 'Gamification',
     engine: 'Unity 3D',
     platforms: 'PC',
     learned: 'Team Project Management, Agile Methodologies (SCRUM), Tower Defense Mechanics, Resource Management Mechanics',
