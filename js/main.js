@@ -389,10 +389,7 @@ function injectGames() {
           <div class="game-learned">◈ ${g.learned}</div>
         </div>
         <div class="game-links">
-          <a class="game-link" href="${g.githubUrl || '#'}" 
-          target="_blank" onclick="event.stopPropagation()">▶ GITHUB</a>
-          <a class="game-link" href="${g.itchUrl || '#'}" 
-          target="_blank" onclick="event.stopPropagation()">◈ ITCH.IO</a>
+          ${g.githubUrl ? `<a class="game-link" href="${g.githubUrl}"           target="_blank" onclick="event.stopPropagation()">▶ GITHUB</a>` : ''}           ${g.itchUrl ? `<a class="game-link" href="${g.itchUrl}"           target="_blank" onclick="event.stopPropagation()">◈ ITCH.IO</a>` : ''}
         <div class="game-link open-popup-btn" data-index="${i}">◆ DEVLOG</div>
         </div>
       </div>
@@ -477,7 +474,10 @@ function buildPopup() {
             <span id="popup-devlog-count"></span>
           </div>
           <div id="popup-devlogs"></div>
+          <div id="popup-links"></div>
         </div>
+
+
 
       </div>
     </div>
@@ -549,6 +549,13 @@ function openPopup(idx) {
       <div class="devlog-body">${d.body}</div>
     </div>
   `).join('');
+
+  // Links
+  const linkItems = [
+    { url: g.githubUrl, label: 'GITHUB' },
+    { url: g.itchUrl, label: 'ITCH.IO' },
+  ].filter(l => l.url);
+  document.getElementById('popup-links').innerHTML = linkItems.length ? `<div class="game-links" style="margin-top:1rem">${         linkItems.map(l =>           `<a class="game-link" href="${l.url}" target="_blank">${l.label}</a>`         ).join('')       }</div>`     : '';
 
   // Show overlay
   const overlay = document.getElementById('game-popup-overlay');
