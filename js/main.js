@@ -371,12 +371,16 @@ function drawScreenshot(container, shot) {
 }
 
 function injectGames() {
-  document.getElementById('games-grid').innerHTML = games.map((g, i) => `
+  // Home page: show only the newest game (index 0) with its first screenshot
+  const g = games[0];
+  const i = 0;
+
+  document.getElementById('games-grid').innerHTML = `
     <div class="game-card" data-index="${i}" style="--hover-bg:${g.hoverBg}; --accent:${g.accent};">
       ${g.featured ? '<div class="featured-badge">★ Featured</div>' : ''}
       <div class="game-thumb" id="thumb-${i}">
-      <img src="${g.screenshots[0].src}" alt="${g.title}" 
-       style="width:100%; height:100%; object-fit:cover; display:block;">
+        <img src="${g.screenshots[0].src}" alt="${g.title}"
+          style="width:100%; height:100%; object-fit:cover; display:block;">
         <div class="game-engine-tag">${g.engine}</div>
         <div class="game-genre-tag ${g.genre}">${g.genreLabel}</div>
         <div class="game-thumb-overlay"></div>
@@ -392,18 +396,16 @@ function injectGames() {
           <div class="game-learned">◈ ${g.learned}</div>
         </div>
         <div class="game-links">
-          ${g.githubUrl ? `<a class="game-link" href="${g.githubUrl}"           target="_blank" onclick="event.stopPropagation()">▶ GITHUB</a>` : ''}           ${g.itchUrl ? `<a class="game-link" href="${g.itchUrl}"           target="_blank" onclick="event.stopPropagation()">◈ ITCH.IO</a>` : ''}
-        <div class="game-link open-popup-btn" data-index="${i}">◆ DEVLOG</div>
+          ${g.githubUrl ? `<a class="game-link" href="${g.githubUrl}" target="_blank" onclick="event.stopPropagation()">▶ GITHUB</a>` : ''}
+          ${g.itchUrl ? `<a class="game-link" href="${g.itchUrl}" target="_blank" onclick="event.stopPropagation()">◈ ITCH.IO</a>` : ''}
+          <div class="game-link open-popup-btn" data-index="${i}">◆ DEVLOG</div>
         </div>
       </div>
     </div>
-  `).join('');
+  `;
 
-  // Attach card click + devlog button click listeners
   document.querySelectorAll('.game-card').forEach(card => {
-    card.addEventListener('click', () => {
-      openPopup(parseInt(card.dataset.index));
-    });
+    card.addEventListener('click', () => openPopup(parseInt(card.dataset.index)));
   });
 
   document.querySelectorAll('.open-popup-btn').forEach(btn => {
