@@ -56,7 +56,7 @@ const games = [
     desc: 'A card game where you work as a programmer to defeat bugs in your code!',
     colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
     screenshots: [
-        { label: "Main Menu",  src: "images/CSWORD1.png" },
+        { label: "Main Menu",  src: "images/csword.gif" },
         { label: "Gameplay",   src: "images/CSWORD2.png" },
         { label: "Gameplay", src: "images/CSWORD3.png" },
     ],
@@ -83,6 +83,7 @@ const games = [
     desc: 'A 2 player local co-op (ragebait) game inspired by Overcooked, where the main goal is to deliver as many orders as possible before the timer runs out!',
     colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
     screenshots: [
+        { label: "Gameplay",  src: "images/cafecatastrophy.gif" },
         { label: "Main Menu",  src: "images/CAFECAT1.png" },
         { label: "Gameplay",   src: "images/CAFECAT2.png" },
     ],
