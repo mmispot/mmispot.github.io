@@ -29,7 +29,7 @@ const games = [
     desc: 'A tower defense game combined with a resource management sim. Integrated into a call center system where you manage customer queues and complete tasks during your workday to power up your defenses & recruit heroes.',
     colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
     screenshots: [
-        { label: "GamePlay",  src: "images/KINGDOMCORP1.png" },
+        { label: "GamePlay",  src: "images/scito.gif" },
         { label: "Gameplay",   src: "images/KINGDOMCORP2.png" },
         { label: "Gameplay", src: "images/KINGDOMCORP3.png" },
     ],
