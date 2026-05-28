@@ -371,48 +371,46 @@ function drawScreenshot(container, shot) {
 }
 
 function injectGames() {
-  // Home page: show only the newest game (index 0) with its first screenshot
-  const g = games[0];
-  const i = 0;
+  const grid = document.getElementById('games-grid');
+  const latest = games[0];
+  const rest = games.slice(1);
 
-  document.getElementById('games-grid').innerHTML = `
-    <div class="game-card" data-index="${i}" style="--hover-bg:${g.hoverBg}; --accent:${g.accent};">
-      ${g.featured ? '<div class="featured-badge">★ Featured</div>' : ''}
-      <div class="game-thumb" id="thumb-${i}">
-        <img src="${g.screenshots[0].src}" alt="${g.title}"
-          style="width:100%; height:100%; object-fit:cover; display:block;">
-        <div class="game-engine-tag">${g.engine}</div>
-        <div class="game-genre-tag ${g.genre}">${g.genreLabel}</div>
-        <div class="game-thumb-overlay"></div>
-      </div>
-      <div class="game-info">
-        <div class="game-title-row">
-          <div class="game-title">${g.title}</div>
-          <div class="game-year">${g.year}</div>
+  grid.innerHTML = `
+    <div class="game-card-hero" style="cursor:pointer" data-index="0">
+      <img src="${latest.screenshots[0].src}" alt="${latest.title}" class="game-hero-img">
+      <div class="game-hero-info">
+        <div class="game-hero-title">${latest.title}</div>
+        <div class="game-hero-meta">
+          ${latest.platforms} &nbsp;·&nbsp;
+          <span class="game-status-tag">${latest.year}</span>
         </div>
-        <div class="game-desc">${g.desc}</div>
-        <div class="game-platform">${g.platforms}</div>
-        <div class="game-meta-row">
-          <div class="game-learned">◈ ${g.learned}</div>
-        </div>
-        <div class="game-links">
-          ${g.githubUrl ? `<a class="game-link" href="${g.githubUrl}" target="_blank" onclick="event.stopPropagation()">▶ GITHUB</a>` : ''}
-          ${g.itchUrl ? `<a class="game-link" href="${g.itchUrl}" target="_blank" onclick="event.stopPropagation()">◈ ITCH.IO</a>` : ''}
-          <div class="game-link open-popup-btn" data-index="${i}">◆ DEVLOG</div>
+        <p class="game-hero-desc">${latest.desc}</p>
+        <div class="game-hero-links">
+          ${latest.githubUrl ? `<a href="${latest.githubUrl}" class="btn btn-ghost btn-sm" target="_blank">▶ GITHUB</a>` : ''}
+          ${latest.itchUrl   ? `<a href="${latest.itchUrl}"   class="btn btn-ghost btn-sm" target="_blank">◆ ITCH.IO</a>` : ''}
         </div>
       </div>
     </div>
+
+    <div class="games-list-small">
+      ${rest.map((g, i) => `
+        <div class="game-card-small" style="cursor:pointer" data-index="${i + 1}">
+          <img src="${g.screenshots[0].src}" alt="${g.title}" class="game-small-img">
+          <div class="game-small-info">
+            <div class="game-small-title">${g.title}</div>
+            <div class="game-small-meta">${g.platforms} · ${g.year}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
   `;
 
-  document.querySelectorAll('.game-card').forEach(card => {
-    card.addEventListener('click', () => openPopup(parseInt(card.dataset.index)));
-  });
+  // Hero card click → open popup
+  grid.querySelector('.game-card-hero').addEventListener('click', () => openPopup(0));
 
-  document.querySelectorAll('.open-popup-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      openPopup(parseInt(btn.dataset.index));
-    });
+  // Small card clicks → open popup
+  grid.querySelectorAll('.game-card-small').forEach(card => {
+    card.addEventListener('click', () => openPopup(parseInt(card.dataset.index)));
   });
 }
 

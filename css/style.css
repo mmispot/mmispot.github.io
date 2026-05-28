@@ -3185,3 +3185,82 @@ body::after {
   line-height: 1.5;
   margin-top: 4px;
 }
+
+.game-card-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  border: 1px solid var(--pink); /* use your existing pink variable */
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.game-hero-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.game-hero-title {
+  font-size: 1rem;
+  color: var(--pink);
+  margin-bottom: 6px;
+  font-family: var(--font-display); /* match your existing mono/display font */
+}
+
+.game-hero-meta {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.game-hero-desc {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.game-hero-links {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-sm {
+  font-size: 0.65rem;
+  padding: 4px 10px;
+}
+
+.games-list-small {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.game-card-small {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border: 1px solid var(--pink);
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+
+.game-card-small:hover { opacity: 1; }
+
+.game-small-img {
+  width: 60px;
+  height: 40px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.game-small-title {
+  font-size: 0.72rem;
+  color: var(--pink);
+}
+
+.game-small-meta {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
