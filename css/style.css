@@ -3190,9 +3190,9 @@ body::after {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  border: 1px solid var(--pink); /* use your existing pink variable */
+  border: 10px solid var(--green); /* was var(--pink) — fix this */
   padding: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .game-hero-img {
@@ -3233,7 +3233,8 @@ body::after {
 .games-list-small {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 15px;
+  /* border: 5px solid var(--green-dim); */
 }
 
 .game-card-small {
