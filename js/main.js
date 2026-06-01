@@ -39,7 +39,7 @@ const games = [
             { date: '11/06/2025', title: 'What I learned from the project',
         body: 'My first time in a management role for a team of +- 10 people. I asked extra feedback from my teachers and oversaw the project\'s progress, divided tasks and managed deadlines.' },
         { date: '15/06/2025', title: 'Credits',
-        body: 'TBA' },
+        body: 'Producer: Emilia Beeke, Inventory System (S.O.): Emilia Beeke' },
       ]
       },
  {
