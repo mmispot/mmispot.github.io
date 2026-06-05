@@ -638,34 +638,47 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 /* ════════════════════════════════
-   STORAGE & STATE
+   SUPABASE CONFIG
 ════════════════════════════════ */
-const STORAGE_KEY = 'miliOS_devlog_posts';
-const TAG_KEY     = 'miliOS_devlog_tags';
-const PASS        = 'miliOS2026';          // ← change this password
+const API = 'api/posts.php';
+const PASS = 'miliOS2026';
 
 let posts        = [];
-let allTags      = [];
+let allTags      = ['MUTANTS OF AGYR','KINGDOM CORP','C-SWORD','CAFE CATASTROPHY','CYBERTHEFT','PEESTO PLUNDERERS','GENERAL'];
 let isAdmin      = false;
 let editingId    = null;
 let activeTag    = 'all';
 let searchQuery  = '';
 let coverDataUrl = null;
 
-function loadData() {
-  try { posts   = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { posts = []; }
-  try { allTags = JSON.parse(localStorage.getItem(TAG_KEY) || '[]'); } catch { allTags = []; }
-  if (!allTags.length) {
-    allTags = ['MUTANTS OF AGYR','KINGDOM CORP','C-SWORD','CAFE CATASTROPHY','CYBERTHEFT','PEESTO PLUNDERERS','GENERAL'];
-    saveTagData();
+async function loadData() {
+  try {
+    const res = await fetch(API);
+    posts = await res.json();
+    const used = [...new Set(posts.flatMap(p => p.tags || []))];
+    used.forEach(t => { if (!allTags.includes(t)) allTags.push(t); });
+  } catch(e) {
+    console.error('Failed to load posts', e);
+    posts = [];
   }
 }
 
-function saveData() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+async function apiSave(post, isUpdate) {
+  return fetch(API + (isUpdate ? '' : ''), {
+    method: isUpdate ? 'PUT' : 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Admin-Key': PASS
+    },
+    body: JSON.stringify(post)
+  });
 }
-function saveTagData() {
-  localStorage.setItem(TAG_KEY, JSON.stringify(allTags));
+
+async function apiDelete(id) {
+  return fetch(`${API}?id=${id}`, {
+    method: 'DELETE',
+    headers: { 'X-Admin-Key': PASS }
+  });
 }
 
 // /* ════════════════════════════════
@@ -991,7 +1004,7 @@ function insertEditorImage(input) {
 /* ════════════════════════════════
    SAVE POST
 ════════════════════════════════ */
-function savePost() {
+async function savePost() {
   const title   = document.getElementById('ed-title').value.trim();
   const content = document.getElementById('wysiwyg-editor').innerHTML;
   const date    = document.getElementById('ed-date').value;
@@ -999,18 +1012,24 @@ function savePost() {
 
   if (!title) { toast('Title required!'); return; }
 
+  const post = {
+    id: editingId || Date.now().toString(),
+    title, content, date, tags,
+    cover: coverDataUrl
+  };
+
+  const res = await apiSave(post, !!editingId);
+  if (!res.ok) { toast('Save failed!'); return; }
+
   if (editingId) {
-    const idx = posts.findIndex(p=>p.id===editingId);
-    if (idx > -1) {
-      posts[idx] = { ...posts[idx], title, content, date, tags, cover:coverDataUrl };
-    }
+    const idx = posts.findIndex(p => p.id === editingId);
+    if (idx > -1) posts[idx] = post;
     toast('Post updated!');
   } else {
-    posts.unshift({ id: Date.now().toString(), title, content, date, tags, cover:coverDataUrl });
+    posts.unshift(post);
     toast('Post published!');
   }
 
-  saveData();
   buildManageList();
   loadEditorForm(null);
   buildTagFilters();
@@ -1043,12 +1062,13 @@ function editPost(id) {
   if (post) loadEditorForm(post);
 }
 
-function deletePost(id) {
+async function deletePost(id) {
   if (!confirm('Delete this post?')) return;
-  posts = posts.filter(p=>p.id!==id);
-  saveData();
+  const res = await apiDelete(id);
+  if (!res.ok) { toast('Delete failed!'); return; }
+  posts = posts.filter(p => p.id !== id);
   buildManageList();
-  if (editingId===id) loadEditorForm(null);
+  if (editingId === id) loadEditorForm(null);
   toast('Post deleted');
 }
 
@@ -1072,6 +1092,7 @@ function toast(msg) {
 /* ════════════════════════════════
    INIT
 ════════════════════════════════ */
-loadData();
-renderPosts();
-buildTagFilters();
+loadData().then(() => {
+  renderPosts();
+  buildTagFilters();
+});
