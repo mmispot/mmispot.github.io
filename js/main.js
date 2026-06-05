@@ -235,17 +235,26 @@ function navigate(page) {
   document.getElementById('status-page').textContent = 'PAGE: ' + page.toUpperCase();
   currentPage = page;
 
-    if (page === 'games') {
+  const adminBtn = document.getElementById('admin-btn');
+  if (adminBtn) adminBtn.style.display = page === 'devlog' ? 'inline-block' : 'none';
+
+  if (page === 'games') {
     const header = document.querySelector('.games-header');
     if (header) header.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else if (page === 'about') {
     const header = document.querySelector('.about-layout');
     if (header) header.scrollIntoView({ behavior: 'smooth', block: 'start' });
-   } else if (page === 'home') {
+  } else if (page === 'home') {
     const header = document.querySelector('.hero-panel');
     if (header) header.scrollIntoView({ behavior: 'smooth', block: 'start' });
-   }
-  else {
+  } else if (page === 'devlog') {
+    const header = document.querySelector('.page-header');
+    if (header) header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('posts-grid').style.display = '';
+    document.getElementById('empty-state').style.display = 'none';
+    renderPosts();
+    buildTagFilters();
+  } else {
     window.scrollTo(0, 0);
   }
 
@@ -628,26 +637,441 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/* ══════════════════════════════════
-   PIXEL AVATAR
-══════════════════════════════════ */
+/* ════════════════════════════════
+   STORAGE & STATE
+════════════════════════════════ */
+const STORAGE_KEY = 'miliOS_devlog_posts';
+const TAG_KEY     = 'miliOS_devlog_tags';
+const PASS        = 'miliOS2026';          // ← change this password
 
-function buildPixelAvatar() {
-  const el = document.getElementById('pixel-avatar');
-  if (!el) return;
+let posts        = [];
+let allTags      = [];
+let isAdmin      = false;
+let editingId    = null;
+let activeTag    = 'all';
+let searchQuery  = '';
+let coverDataUrl = null;
 
-  el.innerHTML = '';
-  const img = document.createElement('img');
-  img.src = 'images/miliOS.png';
-  img.alt = 'Profile photo';
-  img.style.cssText = `
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 4px;
-    border: 3px solid #f8c8dc;
-    box-shadow: 0 0 12px #e8006a33;
-  `;
-  el.appendChild(img);
+function loadData() {
+  try { posts   = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { posts = []; }
+  try { allTags = JSON.parse(localStorage.getItem(TAG_KEY) || '[]'); } catch { allTags = []; }
+  if (!allTags.length) {
+    allTags = ['MUTANTS OF AGYR','KINGDOM CORP','C-SWORD','CAFE CATASTROPHY','CYBERTHEFT','PEESTO PLUNDERERS','GENERAL'];
+    saveTagData();
+  }
 }
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+}
+function saveTagData() {
+  localStorage.setItem(TAG_KEY, JSON.stringify(allTags));
+}
+
+// /* ════════════════════════════════
+//    CLOCK
+// ════════════════════════════════ */
+// function tick() { document.getElementById('sys-time').textContent = new Date().toTimeString().slice(0,8); }
+// setInterval(tick,1000); tick();
+
+/* ════════════════════════════════
+   NAVIGATION
+════════════════════════════════ */
+function showDevlog() {
+  document.getElementById('page-devlog-content').style.display = 'block';
+  document.getElementById('page-editor').style.display = 'none';
+  renderPosts();
+  buildTagFilters();
+}
+
+function showAdmin() {
+  if (isAdmin) { showEditor(); return; }
+  const modal = document.getElementById('login-modal');
+  modal.style.display = 'flex';
+  document.getElementById('pw-input').value = '';
+  document.getElementById('login-err').style.display = 'none';
+  setTimeout(() => document.getElementById('pw-input').focus(), 100);
+}
+
+function closeLoginModal() {
+  document.getElementById('login-modal').style.display = 'none';
+}
+
+function showEditor(post=null) {
+  document.getElementById('page-devlog-content').style.display = 'none';
+  document.getElementById('page-editor').style.display = 'block';
+  document.getElementById('admin-indicator').style.display = 'flex';
+  loadEditorForm(post);
+}
+
+/* ════════════════════════════════
+   AUTH
+════════════════════════════════ */
+function tryLogin() {
+  const pw = document.getElementById('pw-input').value;
+  if (pw === PASS) {
+    isAdmin = true;
+    closeLoginModal();
+    document.getElementById('admin-btn').textContent = '⌥ EDITOR';
+    document.getElementById('admin-indicator').style.display = 'flex';
+    showEditor();
+  } else {
+    document.getElementById('login-err').style.display = 'block';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+function logout() {
+  isAdmin = false;
+  editingId = null;
+  document.getElementById('admin-btn').textContent = '⌥ ADMIN';
+  document.getElementById('admin-indicator').style.display = 'none';
+  showDevlog();
+  toast('Logged out');
+}
+
+/* ════════════════════════════════
+   RENDER POSTS
+════════════════════════════════ */
+function getFiltered() {
+  let result = [...posts];
+  if (activeTag !== 'all') result = result.filter(p => p.tags && p.tags.includes(activeTag));
+  if (searchQuery.trim()) {
+    const q = searchQuery.toLowerCase();
+    result = result.filter(p =>
+      p.title.toLowerCase().includes(q) ||
+      (p.content||'').toLowerCase().includes(q) ||
+      (p.tags||[]).some(t=>t.toLowerCase().includes(q))
+    );
+  }
+  return result.sort((a,b)=>new Date(b.date)-new Date(a.date));
+}
+
+function stripHtml(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.textContent || '';
+}
+
+function renderPosts() {
+  const grid = document.getElementById('posts-grid');
+  const noR  = document.getElementById('no-results');
+  const emp  = document.getElementById('empty-state');
+  const filtered = getFiltered();
+
+  document.getElementById('post-count-status').textContent = posts.length + ' ENTRIES';
+
+  if (!posts.length) {
+    grid.innerHTML=''; grid.style.display='none';
+    noR.style.display='none'; emp.style.display='block'; return;
+  }
+  emp.style.display='none'; grid.style.display='grid';
+
+  if (!filtered.length) {
+    grid.innerHTML=''; noR.style.display='block'; return;
+  }
+  noR.style.display='none';
+
+  grid.innerHTML = filtered.map(p => {
+    const excerpt = stripHtml(p.content||'').slice(0,180) + (stripHtml(p.content||'').length>180?'...':'');
+    const img = p.cover
+      ? `<img class="post-img" src="${p.cover}" alt="${p.title}" loading="lazy">`
+      : `<div class="post-img-placeholder">◈ ${(p.tags||['??'])[0]||'LOG'}</div>`;
+    const tags = (p.tags||[]).map(t=>`<span class="post-tag">${t}</span>`).join('');
+    const dateStr = p.date ? new Date(p.date).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}).toUpperCase() : 'UNDATED';
+    return `
+      <div class="post-card" onclick="openModal('${p.id}')">
+        ${img}
+        <div class="post-body">
+          <div class="post-tags">${tags}</div>
+          <div class="post-title">${p.title}</div>
+          <div class="post-excerpt">${excerpt||'No content yet.'}</div>
+          <div class="post-meta">
+            <span class="post-date">${dateStr}</span>
+            <span class="post-read">◆ READ MORE</span>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+/* ════════════════════════════════
+   TAG FILTERS
+════════════════════════════════ */
+function buildTagFilters() {
+  const usedTags = [...new Set(posts.flatMap(p=>p.tags||[]))];
+  const wrap = document.getElementById('tag-filters');
+  const existing = Array.from(wrap.querySelectorAll('[data-tag]')).map(b=>b.dataset.tag);
+  
+  usedTags.forEach(tag => {
+    if (!existing.includes(tag)) {
+      const btn = document.createElement('button');
+      btn.className = 'tag-btn' + (activeTag===tag?' active':'');
+      btn.dataset.tag = tag;
+      btn.textContent = tag;
+      btn.onclick = function(){ filterTag(tag,this); };
+      wrap.appendChild(btn);
+    }
+  });
+}
+
+function filterTag(tag, btn) {
+  activeTag = tag;
+  document.querySelectorAll('.tag-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPosts();
+}
+
+/* ════════════════════════════════
+   SEARCH
+════════════════════════════════ */
+document.getElementById('search-input').addEventListener('input', function(){
+  searchQuery = this.value;
+  renderPosts();
+});
+
+/* ════════════════════════════════
+   MODAL
+════════════════════════════════ */
+function openModal(id) {
+  const p = posts.find(x=>x.id===id);
+  if (!p) return;
+  document.getElementById('modal-bar-title').textContent = p.title.toUpperCase() + ' // DEVLOG';
+  document.getElementById('modal-title').textContent = p.title;
+  const dateStr = p.date ? new Date(p.date).toLocaleDateString('en-GB',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}).toUpperCase() : '';
+  document.getElementById('modal-date').textContent = dateStr;
+  document.getElementById('modal-content').innerHTML = p.content||'';
+
+  const img = document.getElementById('modal-hero-img');
+  if (p.cover) { img.src=p.cover; img.style.display='block'; }
+  else { img.style.display='none'; }
+
+  const tagsEl = document.getElementById('modal-tags');
+  tagsEl.innerHTML = (p.tags||[]).map(t=>`<span class="modal-tag">${t}</span>`).join('');
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModalBtn();
+}
+function closeModalBtn() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown', e => { if (e.key==='Escape') closeModalBtn(); });
+
+/* ════════════════════════════════
+   EDITOR FORM
+════════════════════════════════ */
+function loadEditorForm(post=null) {
+  editingId = post ? post.id : null;
+  coverDataUrl = post ? (post.cover||null) : null;
+
+  document.getElementById('ed-title').value   = post ? post.title : '';
+  document.getElementById('wysiwyg-editor').innerHTML = post ? (post.content||'') : '';
+  document.getElementById('ed-date').value    = post ? (post.date||today()) : today();
+
+  const prev = document.getElementById('cover-preview');
+  const rem  = document.getElementById('cover-remove-btn');
+  if (coverDataUrl) { prev.src=coverDataUrl; prev.style.display='block'; rem.style.display='block'; }
+  else { prev.style.display='none'; rem.style.display='none'; }
+
+  buildTagCheckboxes(post ? (post.tags||[]) : []);
+  buildManageList();
+}
+
+function today() {
+  return new Date().toISOString().slice(0,10);
+}
+
+function buildTagCheckboxes(selected=[]) {
+  const wrap = document.getElementById('tag-checks');
+  wrap.innerHTML = allTags.map(tag => `
+    <label class="tag-check">
+      <input type="checkbox" value="${tag}" ${selected.includes(tag)?'checked':''}>
+      <span>${tag}</span>
+    </label>
+  `).join('');
+}
+
+function addNewTag(e) {
+  if (e.key !== 'Enter') return;
+  const val = document.getElementById('new-tag-input').value.trim().toUpperCase();
+  if (!val || allTags.includes(val)) return;
+  allTags.push(val);
+  saveTagData();
+  const checked = getCheckedTags();
+  buildTagCheckboxes([...checked, val]);
+  document.getElementById('new-tag-input').value='';
+  buildTagFilters();
+}
+
+function getCheckedTags() {
+  return Array.from(document.querySelectorAll('#tag-checks input[type=checkbox]:checked')).map(i=>i.value);
+}
+
+/* ════════════════════════════════
+   COVER IMAGE
+════════════════════════════════ */
+function handleCoverUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    coverDataUrl = e.target.result;
+    const prev = document.getElementById('cover-preview');
+    prev.src = coverDataUrl; prev.style.display='block';
+    document.getElementById('cover-remove-btn').style.display='block';
+  };
+  reader.readAsDataURL(file);
+}
+function removeCover() {
+  coverDataUrl = null;
+  document.getElementById('cover-preview').style.display='none';
+  document.getElementById('cover-remove-btn').style.display='none';
+  document.getElementById('cover-file').value='';
+}
+
+/* Drag-and-drop on dropzone */
+const dz = document.getElementById('cover-dropzone');
+dz.addEventListener('dragover', e=>{ e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave', ()=>dz.classList.remove('drag-over'));
+dz.addEventListener('drop', e=>{
+  e.preventDefault(); dz.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const r=new FileReader();
+    r.onload=ev=>{
+      coverDataUrl=ev.target.result;
+      const prev=document.getElementById('cover-preview');
+      prev.src=coverDataUrl; prev.style.display='block';
+      document.getElementById('cover-remove-btn').style.display='block';
+    };
+    r.readAsDataURL(file);
+  }
+});
+
+/* ════════════════════════════════
+   WYSIWYG FORMAT COMMANDS
+════════════════════════════════ */
+function fmt(cmd, val=null) {
+  document.getElementById('wysiwyg-editor').focus();
+  document.execCommand(cmd, false, val);
+}
+
+function insertCode() {
+  const sel = window.getSelection();
+  if (sel && sel.toString()) {
+    document.execCommand('insertHTML',false,`<code>${sel.toString()}</code>`);
+  } else {
+    document.execCommand('insertHTML',false,'<code>code here</code>');
+  }
+}
+
+function insertLink() {
+  const url = prompt('Enter URL:');
+  if (url) document.execCommand('createLink',false,url);
+}
+
+function insertEditorImage(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('wysiwyg-editor').focus();
+    document.execCommand('insertHTML',false,`<img src="${e.target.result}" style="max-width:100%;border:1px solid var(--border);margin:12px 0;display:block;" alt="image">`);
+  };
+  reader.readAsDataURL(file);
+  input.value='';
+}
+
+/* ════════════════════════════════
+   SAVE POST
+════════════════════════════════ */
+function savePost() {
+  const title   = document.getElementById('ed-title').value.trim();
+  const content = document.getElementById('wysiwyg-editor').innerHTML;
+  const date    = document.getElementById('ed-date').value;
+  const tags    = getCheckedTags();
+
+  if (!title) { toast('Title required!'); return; }
+
+  if (editingId) {
+    const idx = posts.findIndex(p=>p.id===editingId);
+    if (idx > -1) {
+      posts[idx] = { ...posts[idx], title, content, date, tags, cover:coverDataUrl };
+    }
+    toast('Post updated!');
+  } else {
+    posts.unshift({ id: Date.now().toString(), title, content, date, tags, cover:coverDataUrl });
+    toast('Post published!');
+  }
+
+  saveData();
+  buildManageList();
+  loadEditorForm(null);
+  buildTagFilters();
+}
+
+/* ════════════════════════════════
+   MANAGE POSTS LIST
+════════════════════════════════ */
+function buildManageList() {
+  const wrap = document.getElementById('manage-list');
+  if (!posts.length) { wrap.innerHTML='<div class="manage-empty">No posts yet.</div>'; return; }
+  wrap.innerHTML = posts.map(p=>{
+    const d = p.date ? new Date(p.date).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}).toUpperCase() : '—';
+    return `
+      <div class="manage-item">
+        <div>
+          <div class="manage-item-title">${p.title}</div>
+          <div class="manage-item-date">${d}</div>
+        </div>
+        <div class="manage-item-btns">
+          <button class="manage-btn edit" onclick="editPost('${p.id}')">EDIT</button>
+          <button class="manage-btn del"  onclick="deletePost('${p.id}')">DEL</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function editPost(id) {
+  const post = posts.find(p=>p.id===id);
+  if (post) loadEditorForm(post);
+}
+
+function deletePost(id) {
+  if (!confirm('Delete this post?')) return;
+  posts = posts.filter(p=>p.id!==id);
+  saveData();
+  buildManageList();
+  if (editingId===id) loadEditorForm(null);
+  toast('Post deleted');
+}
+
+function cancelEdit() {
+  loadEditorForm(null);
+  showDevlog();
+}
+
+/* ════════════════════════════════
+   TOAST
+════════════════════════════════ */
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>el.classList.remove('show'), 2800);
+}
+
+/* ════════════════════════════════
+   INIT
+════════════════════════════════ */
+loadData();
+renderPosts();
+buildTagFilters();

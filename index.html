@@ -29,14 +29,16 @@
     <button class="taskbar-btn active" id="nav-home"  onclick="navigate('home')">HOME.exe</button>
     <button class="taskbar-btn"        id="nav-about" onclick="navigate('about')">ABOUT.txt</button>
     <button class="taskbar-btn"        id="nav-games" onclick="navigate('games')">RELEASES.dir</button>
-    <button class="taskbar-btn"> <a href="devlog.html">DEVLOG.sys</a></button>
+    <button class="taskbar-btn"        id="nav-devlog" onclick="navigate('devlog')">DEVLOG.sys</button>
   </div>
   <div id="taskbar-right">
-    <span id="sys-time">--:--:--</span>
-    <button id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+  <span id="sys-time">--:--:--</span>
+  <button class="taskbar-btn" id="admin-btn" onclick="showAdmin()" 
+          style="display:none; font-size:10px; padding:4px 10px;">⌥ ADMIN</button>
+  <button id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</div>
 </nav>
 
 <!-- ══════════════════════════════════
@@ -336,11 +338,172 @@
   <div class="status-item"><div class="dot green"></div> ONLINE</div>
   <div class="status-item"><div class="dot green"></div> PORTFOLIO.OS v2.1</div>
   <div class="status-item"><div class="dot amber"></div> WIP: MUTANTS OF AGYR</div>
+  <div class="status-item"><span id="post-count-status" style="display:none;">0 ENTRIES</span></div>
   <div class="status-right">
+    <div class="status-item" id="admin-indicator" style="display:none;"><div class="dot amber"></div> ADMIN MODE</div>
     <div class="status-item">MOOD: =]</div>
     <div class="status-item">MEM: 42.0MB</div>
     <div class="status-item" id="status-page">PAGE: HOME</div>
   </div>
+</div>
+
+
+<!-- ============================
+      DEVLOG PAGE
+      ===========================-->
+
+<div id="page-devlog" class="page">
+
+  <!-- ══════ DEVLOG CONTENT ══════ -->
+  <div id="page-devlog-content">
+    <div class="page-header">
+      <div class="page-title">DEVLOG.sys</div>
+      <div class="page-sub">development journal // sorted by date</div>
+    </div>
+
+    <div class="controls-bar">
+      <div class="search-wrap">
+        <input type="text" id="search-input" placeholder="search devlogs..." autocomplete="off">
+      </div>
+      <div class="tag-filters" id="tag-filters">
+        <button class="tag-btn active" data-tag="all" onclick="filterTag('all',this)">ALL</button>
+      </div>
+    </div>
+
+    <div id="no-results"><p style="font-family:var(--display);font-size:28px;color:var(--muted);">NO_RESULTS.err</p></div>
+    <div id="posts-grid"></div>
+
+    <div id="empty-state" class="empty-state" style="display:none;">
+      <p>NO_ENTRIES.log</p>
+      <small>no devlog posts yet — add one via admin panel</small>
+    </div>
+  </div>
+
+  <!-- ══════ EDITOR ══════ -->
+  <div id="page-editor" style="display:none;">
+    <div class="editor-header">
+      <div class="editor-title">EDITOR.app</div>
+      <div class="editor-actions">
+        <button class="btn btn-ghost" onclick="cancelEdit()">CANCEL</button>
+        <button class="btn btn-primary" onclick="savePost()">SAVE_POST.exe</button>
+      </div>
+    </div>
+    <div class="editor-body">
+      <div class="ed-main">
+        <div class="ed-field">
+          <label>Post Title</label>
+          <input type="text" id="ed-title" placeholder="e.g. Working on enemy AI systems">
+        </div>
+        <div class="ed-field">
+          <label>Content</label>
+          <div class="wysiwyg-wrap">
+            <div class="wysiwyg-toolbar">
+              <button class="tb-btn" title="Bold" onclick="fmt('bold')"><b>B</b></button>
+              <button class="tb-btn" title="Italic" onclick="fmt('italic')"><i>I</i></button>
+              <button class="tb-btn" title="Underline" onclick="fmt('underline')"><u>U</u></button>
+              <button class="tb-btn" title="Strikethrough" onclick="fmt('strikeThrough')"><s>S</s></button>
+              <div style="width:1px;background:var(--border);margin:0 4px;"></div>
+              <button class="tb-btn" title="H1" onclick="fmt('formatBlock','h1')">H1</button>
+              <button class="tb-btn" title="H2" onclick="fmt('formatBlock','h2')">H2</button>
+              <button class="tb-btn" title="H3" onclick="fmt('formatBlock','h3')">H3</button>
+              <div style="width:1px;background:var(--border);margin:0 4px;"></div>
+              <button class="tb-btn" title="Unordered list" onclick="fmt('insertUnorderedList')">• List</button>
+              <button class="tb-btn" title="Ordered list" onclick="fmt('insertOrderedList')">1. List</button>
+              <button class="tb-btn" title="Blockquote" onclick="fmt('formatBlock','blockquote')">❝</button>
+              <button class="tb-btn" title="Code" onclick="insertCode()">{ }</button>
+              <div style="width:1px;background:var(--border);margin:0 4px;"></div>
+              <button class="tb-btn" title="Insert link" onclick="insertLink()">🔗</button>
+              <button class="tb-btn img-insert-btn" title="Insert image">
+                🖼 IMG
+                <input type="file" accept="image/*" onchange="insertEditorImage(this)">
+              </button>
+              <div style="width:1px;background:var(--border);margin:0 4px;"></div>
+              <button class="tb-btn" title="Align left" onclick="fmt('justifyLeft')">⬱</button>
+              <button class="tb-btn" title="Align center" onclick="fmt('justifyCenter')">☰</button>
+              <button class="tb-btn" title="Clear format" onclick="fmt('removeFormat')">Ⓧ</button>
+            </div>
+            <div id="wysiwyg-editor" contenteditable="true" spellcheck="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="ed-sidebar">
+        <div class="ed-panel">
+          <div class="ed-panel-title">Cover Image</div>
+          <div id="cover-dropzone" onclick="document.getElementById('cover-file').click()">
+            <div style="font-size:24px;margin-bottom:8px;">⬆</div>
+            <div>Click to upload image</div>
+            <div style="font-size:10px;margin-top:4px;color:var(--border-bright);">JPG · PNG · GIF · WEBP</div>
+          </div>
+          <input type="file" id="cover-file" accept="image/*" style="display:none" onchange="handleCoverUpload(this)">
+          <img id="cover-preview" alt="Cover preview">
+          <button class="cover-remove" id="cover-remove-btn" onclick="removeCover()">✕ Remove image</button>
+        </div>
+        <div class="ed-panel">
+          <div class="ed-panel-title">Post Date</div>
+          <div class="ed-field">
+            <input type="date" id="ed-date">
+          </div>
+        </div>
+        <div class="ed-panel">
+          <div class="ed-panel-title">Project Tags</div>
+          <div class="tag-checks" id="tag-checks"></div>
+          <div style="margin-top:12px;">
+            <div class="tag-check" style="cursor:default;">
+              <span style="color:var(--amber);font-size:11px;">+ New tag</span>
+            </div>
+            <input type="text" id="new-tag-input" placeholder="type tag name + press Enter" onkeydown="addNewTag(event)">
+          </div>
+        </div>
+        <div class="ed-panel">
+          <div class="ed-panel-title">Manage Posts</div>
+          <div id="manage-list"></div>
+        </div>
+        <button class="btn btn-danger" onclick="logout()" style="width:100%;">LOGOUT.sys</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <!-- ══════ LOGIN PAGE ══════ -->
+<div id="login-modal" style="display:none; position:fixed; inset:0; background:rgba(26,10,16,.7); z-index:9000; align-items:center; justify-content:center;">
+  <div style="background:var(--surface); border:1px solid var(--border); padding:40px 48px; width:100%; max-width:380px; box-shadow:0 8px 48px rgba(232,0,106,0.15);">
+    <div style="font-family:var(--display); font-size:36px; color:var(--green); text-shadow:var(--glow); margin-bottom:4px;">ADMIN.login</div>
+    <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:3px; margin-bottom:28px;">authenticate to continue</div>
+    <div style="margin-bottom:18px;">
+      <label style="display:block; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:2px; margin-bottom:6px;">Password</label>
+      <input type="password" id="pw-input" placeholder="enter password"
+        style="width:100%; padding:9px 12px; background:var(--panel); border:1px solid var(--border); color:var(--white); font-family:var(--mono); font-size:13px; outline:none;"
+        onkeydown="if(event.key==='Enter')tryLogin()">
+    </div>
+    <div class="login-err" id="login-err" style="display:none; font-size:11px; color:var(--red); margin-bottom:14px;">// ACCESS DENIED — wrong password</div>
+    <button class="btn btn-primary" onclick="tryLogin()" style="width:100%;">AUTHENTICATE.exe</button>
+    <button class="btn btn-ghost" onclick="closeLoginModal()" style="width:100%; margin-top:8px;">← CANCEL</button>
+  </div>
+</div>
+
+<!-- POST MODAL -->
+<div id="modal-overlay" onclick="closeModal(event)">
+  <div id="modal" role="dialog" aria-modal="true">
+    <div id="modal-bar">
+      <div class="win-dot red"></div>
+      <div class="win-dot amber"></div>
+      <div class="win-dot green"></div>
+      <span id="modal-bar-title">DEVLOG_ENTRY.dir</span>
+      <button id="modal-close" onclick="closeModalBtn()">&times;</button>
+    </div>
+    <div id="modal-body">
+      <img id="modal-hero-img" alt="Cover">
+      <div class="modal-tags" id="modal-tags"></div>
+      <div id="modal-title"></div>
+      <div id="modal-date"></div>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
 </div>
 
 <script src="js/main.js"></script>
