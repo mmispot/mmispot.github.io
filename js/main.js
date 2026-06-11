@@ -203,7 +203,6 @@ function bootStep() {
       injectSkills();
       injectGames();
       injectGallery();
-      buildPixelAvatar();
     }, 400);
   }
 }
@@ -641,7 +640,6 @@ window.addEventListener("DOMContentLoaded", () => {
    SUPABASE CONFIG
 ════════════════════════════════ */
 const API = 'api/posts.php';
-const PASS = 'miliOS2026';
 
 let posts        = [];
 let allTags      = ['MUTANTS OF AGYR','KINGDOM CORP','C-SWORD','CAFE CATASTROPHY','CYBERTHEFT','PEESTO PLUNDERERS','GENERAL'];
@@ -663,23 +661,23 @@ async function loadData() {
   }
 }
 
-async function apiSave(post, isUpdate) {
-  return fetch(API + (isUpdate ? '' : ''), {
-    method: isUpdate ? 'PUT' : 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Admin-Key': PASS
-    },
-    body: JSON.stringify(post)
-  });
-}
+// async function apiSave(post, isUpdate) {
+//   return fetch(API + (isUpdate ? '' : ''), {
+//     method: isUpdate ? 'PUT' : 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       'X-Admin-Key': PASS
+//     },
+//     body: JSON.stringify(post)
+//   });
+// }
 
-async function apiDelete(id) {
-  return fetch(`${API}?id=${id}`, {
-    method: 'DELETE',
-    headers: { 'X-Admin-Key': PASS }
-  });
-}
+// async function apiDelete(id) {
+//   return fetch(`${API}?id=${id}`, {
+//     method: 'DELETE',
+//     headers: { 'X-Admin-Key': PASS }
+//   });
+// }
 
 // /* ════════════════════════════════
 //    CLOCK
@@ -720,30 +718,79 @@ function showEditor(post=null) {
 /* ════════════════════════════════
    AUTH
 ════════════════════════════════ */
-function tryLogin() {
-  const pw = document.getElementById('pw-input').value;
-  if (pw === PASS) {
-    isAdmin = true;
-    closeLoginModal();
-    document.getElementById('admin-btn').textContent = '⌥ EDITOR';
-    document.getElementById('admin-indicator').style.display = 'flex';
-    showEditor();
-  } else {
-    document.getElementById('login-err').style.display = 'block';
-    document.getElementById('pw-input').value = '';
-    document.getElementById('pw-input').focus();
-  }
+// ─────────────────────────────────────────
+//  AUTH  (replaces the old PASS constant
+//  and tryLogin / logout functions)
+// ─────────────────────────────────────────
+
+// Token is kept only in memory — never written to localStorage/cookies.
+// It disappears the moment the page is closed or refreshed.
+let adminToken = null;
+
+async function tryLogin() {
+    const pw = document.getElementById('pw-input').value;
+
+    try {
+        const res = await fetch('api/login.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: pw }),
+        });
+
+        if (!res.ok) {
+            document.getElementById('login-err').style.display = 'block';
+            document.getElementById('pw-input').value = '';
+            document.getElementById('pw-input').focus();
+            return;
+        }
+
+        const data = await res.json();
+        adminToken = data.token;          // store token in memory only
+        isAdmin = true;
+
+        closeLoginModal();
+        document.getElementById('admin-btn').textContent = '⌥ EDITOR';
+        document.getElementById('admin-indicator').style.display = 'flex';
+        showEditor();
+
+    } catch (err) {
+        console.error('Login request failed', err);
+        document.getElementById('login-err').style.display = 'block';
+    }
 }
 
 function logout() {
-  isAdmin = false;
-  editingId = null;
-  document.getElementById('admin-btn').textContent = '⌥ ADMIN';
-  document.getElementById('admin-indicator').style.display = 'none';
-  showDevlog();
-  toast('Logged out');
+    adminToken = null;
+    isAdmin = false;
+    editingId = null;
+    document.getElementById('admin-btn').textContent = '⌥ ADMIN';
+    document.getElementById('admin-indicator').style.display = 'none';
+    showDevlog();
+    toast('Logged out');
 }
 
+// ─────────────────────────────────────────
+//  API helpers  (replaces apiSave / apiDelete)
+//  Now sends X-Admin-Token instead of X-Admin-Key
+// ─────────────────────────────────────────
+
+async function apiSave(post, isUpdate) {
+    return fetch('api/posts.php', {
+        method: isUpdate ? 'PUT' : 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Admin-Token': adminToken,       // ← token, not plaintext password
+        },
+        body: JSON.stringify(post),
+    });
+}
+
+async function apiDelete(id) {
+    return fetch(`api/posts.php?id=${id}`, {
+        method: 'DELETE',
+        headers: { 'X-Admin-Token': adminToken },
+    });
+}
 /* ════════════════════════════════
    RENDER POSTS
 ════════════════════════════════ */
