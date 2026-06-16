@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST')    { http_response_code(405); exit; }
 //  then paste the output below and delete
 //  generate-hash.php from your server.
 // ─────────────────────────────────────────
-$PASS_HASH = '$2y$12$FVHbxos0QAIDlrZyV1MzgeMkNa1gr6ldFSlkujDXVayntjYFvF.e2';
+$PASS_HASH = '$2y$12$4M8ueuGRSPEJnI5FDBhZu.NVUiZfiqJpYbrVlXLIY/0nlOx2luYGO';
 
 // ─────────────────────────────────────────
 //  Session token storage
