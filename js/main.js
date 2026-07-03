@@ -16,6 +16,33 @@ const skills = [
 
 const games = [
   {
+    title: 'MUTANTS OF AGYR',
+    itchUrl: 'https://mmispot.itch.io/mutants-of-agyr',
+    githubUrl: 'https://gist.github.com/mmispot/74b23e87dd9e321cdab75d7d8e6cffc5',
+    year: '2026',
+    genre: 'First Person Shooter',
+    genreLabel: 'Post-Apocalyptic FPS',
+    engine: 'Unity 3D',
+    platforms: 'PC',
+    learned: 'Team Project Management, Agile Methodologies (SCRUM), FPS Mechanics, Grid-based Inventory system',
+    featured: true,
+    desc: 'Find your way through the laboratory, kill mutants, and most importantly: save the world of Agyr.',
+    colorA: '#fce8f0', colorB: '#f8c8dc', accent: '#e8006a', hoverBg: '#fce0ec',
+    screenshots: [
+        { label: "GamePlay",  src: "images/moa2.png" },
+        { label: "Gameplay",   src: "images/moa3.png" },
+        { label: "Gameplay", src: "images/moa1.png" },
+    ],
+    devlogs: [
+      { date: '3/7/2026', title: 'My role in the project',
+        body: 'SCRUM Master, Inventory System (S.O.), Score Manager' },
+            { date: '30/6/2026', title: 'What I learned from the project',
+        body: 'My first time making a First Person Shooter game. I never play these, so making this was a fun challenge!' },
+        { date: '3/7/2026', title: 'Credits',
+        body: 'Developers: Emilia de Boer, Karsten Kooistra, Dominik Drenth, Senna van Maren. Artists: Timo van Hanegem, Yoeri van de Kuil, Lauran van Veer' },
+      ]
+      },
+  {
     title: 'KINGDOM CORP',
     itchUrl: '',
     githubUrl: 'https://gist.github.com/mmispot/834e98454f7add3506319196d4a3e97b',
